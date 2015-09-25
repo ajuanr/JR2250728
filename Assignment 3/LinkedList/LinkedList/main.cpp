@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
     for(int i=1;i<=clinks;i++){
         list.append(i);
     }
+    list.remove(10);
     //Print the data
     cout<<list.toString()<<endl;
     //Exit stage right!

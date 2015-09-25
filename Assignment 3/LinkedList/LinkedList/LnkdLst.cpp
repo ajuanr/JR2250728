@@ -70,3 +70,30 @@ LnkdLst::~LnkdLst() {
 //*****************************************************
 
 
+void LnkdLst::remove(int n) {
+    Node *prev;
+    if (head) {
+        worker = head;
+        do {
+            prev = worker;
+        }while((worker=worker->next) && (worker->data!=n));
+        // data to be removed was found
+        if (worker->data==n) {
+            if(worker == head) {
+                //delete head
+            }
+            else if (worker->next == NULL) {
+                // delete tail
+                // might be only element
+                if(worker == head) delete worker;
+                else {
+                    delete worker;
+                    prev->next=NULL;
+                }
+            }
+            else {
+                // delete middle element
+            }
+        }
+    }
+}
