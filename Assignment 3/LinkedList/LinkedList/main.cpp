@@ -19,7 +19,12 @@ int main(int argc, char** argv) {
     for(int i=1;i<=clinks;i++){
         list.append(i);
     }
-    list.remove(10);
+    list.dltHead();
+    list.dltHead();
+    list.append(77);
+//    list.testDltLast();
+    list.remove(77);
+//    list.append(77);
     //Print the data
     cout<<list.toString()<<endl;
     //Exit stage right!

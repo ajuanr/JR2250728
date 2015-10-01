@@ -21,6 +21,9 @@ public:
     
     
     void dltLast();
+    void dltHead();
+    
+    void testDltLast();
     
     void remove(int);
 private:
@@ -30,6 +33,10 @@ private:
     };
     Node *head;
     Node *worker;
+    
+    void dltLast(Node *);
+    void dltMid(Node *);
+
     
 
 };
