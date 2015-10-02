@@ -87,32 +87,49 @@ void LnkdLst::dltHead() {
     }
         }
 
-void LnkdLst::dltLast(Node *penult) {
-    Node *temp = penult->next;
-    delete temp;
-    penult->next=NULL;
+void LnkdLst::dltCurrent(Node *current) {
+    // current is the head
+    if (head) {
+        if (current == head) dltHead();
+        else if (!current->next) dltLast();
+        else dltMid(current);
+    }
 }
 
-void LnkdLst::testDltLast() {
-        Node *prev;
-        if(head){
-            worker=head;
-            while(worker-worker->next) { prev=worker;}
-            cout << prev->data << " DATA" << endl;
+void LnkdLst::dltLast() {
+    if (head) {
+        Node *prev = head;
+        worker = head;
+        while (worker=worker->next) {
+            if (worker->next) prev=worker;
         }
-    dltLast(prev);
+        // last node is the only node
+        if (prev == head) {
+            dltHead();
+        }
+        else {
+            prev->next=NULL;
+            delete worker;
+        }
+    }
 }
 
-// delete a node that's not the head or the last node
+//******************************************************
+// ** delete a node that's not the head or the last node
+// ** won't work for head or last node *****************
+//******************************************************
 void LnkdLst::dltMid(Node *mid) {
-    // make sure it's between two nodes
-    if (mid->next && mid!=head) {
-        Node *temp = mid->next;
+    if (head) {
+
+        // make sure it's between two nodes
+        if (mid->next && mid !=head) {
+            worker = mid->next;
         
-        mid->data = temp->data;
-        mid->next = temp->next;
+            mid->data = worker->data;
+            mid->next = worker->next;
         
-        delete temp;
+            delete worker;
+        }
     }
 }
 
@@ -125,11 +142,16 @@ void LnkdLst::remove(int n) {
         worker=head;
         bool found=false;;
         do{
-            cout << worker->data << endl;
             prev=worker;
             if (worker && worker->data==n) {found=true;}
 
         } while((worker=worker->next) && !found);
-        if (found) { cout << "Found\n";}
+        if (found) {
+            dltCurrent(prev);
+//            if (prev == head) dltHead();
+//            else if (!prev->next) dltLast();
+//            else dltMid(prev);
+            
+        }
     }
 }

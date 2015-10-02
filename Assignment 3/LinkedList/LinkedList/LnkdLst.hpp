@@ -34,7 +34,7 @@ private:
     Node *head;
     Node *worker;
     
-    void dltLast(Node *);
+    void dltCurrent(Node *);
     void dltMid(Node *);
 
     
