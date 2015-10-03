@@ -1,24 +1,24 @@
 //
-//  LnkdLst.hpp
+//  VecLst.hpp
 //  LinkedList
 //
 //
 
-#ifndef LnkdLst_hpp
-#define LnkdLst_hpp
+#ifndef VecLst_hpp
+#define VecLst_hpp
 
 #include <stdio.h>
 
 #include <string>
 using namespace std;
 
-class LnkdLst {
+class VecLst {
 public:
-    LnkdLst();
-    LnkdLst(int);
+    VecLst();
+    VecLst(int);
     void append(int);
     string toString();
-    virtual ~LnkdLst();
+    virtual ~VecLst();
     
     
     void dltLast();
@@ -43,4 +43,4 @@ private:
     void dltMid(Node *);
 };
 
-#endif /* LnkdLst_hpp */
+#endif /* VecLst_hpp */

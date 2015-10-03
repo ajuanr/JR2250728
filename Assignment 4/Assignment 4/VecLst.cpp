@@ -1,16 +1,16 @@
 //
-//  LnkdLst.cpp
+//  VecLst.cpp
 //  LinkedList
 //
 //
 
-#include "LnkdLst.hpp"
+#include "VecLst.hpp"
 
 #include <sstream>
 
 #include <iostream>
 
-LnkdLst::LnkdLst(int n) {
+VecLst::VecLst(int n) {
     Node *clink=new Node;
     clink->data=n;
     clink->next=NULL;
@@ -18,7 +18,7 @@ LnkdLst::LnkdLst(int n) {
     size = 1;
 }
 
-void LnkdLst::append(int n){
+void VecLst::append(int n){
     Node *prev;
     if(head){
         worker=head;
@@ -39,7 +39,7 @@ void LnkdLst::append(int n){
     }
 }
 
-string LnkdLst::toString(){
+string VecLst::toString(){
     string build="";
     char counter=48;
     if(head){
@@ -57,7 +57,7 @@ string LnkdLst::toString(){
     return build;
 }
 
-LnkdLst::~LnkdLst() {
+VecLst::~VecLst() {
     if(head){
         worker = head;
         do{
@@ -76,11 +76,11 @@ LnkdLst::~LnkdLst() {
 //*****************************************************
 //** Default constructor ****
 //*****************************************************
-LnkdLst::LnkdLst() {
+VecLst::VecLst() {
     head=NULL;
 }
 
-void LnkdLst::dltHead() {
+void VecLst::dltHead() {
     // head is not the only node
     if(head) {
         worker=head;
@@ -99,7 +99,7 @@ void LnkdLst::dltHead() {
     }
         }
 
-void LnkdLst::dltCurrent(Node *current) {
+void VecLst::dltCurrent(Node *current) {
     // current is the head
     if (head) {
         if (current == head) dltHead();
@@ -109,7 +109,7 @@ void LnkdLst::dltCurrent(Node *current) {
     }
 }
 
-void LnkdLst::dltLast() {
+void VecLst::dltLast() {
     if (head) {
         Node *prev = head;
         worker = head;
@@ -133,7 +133,7 @@ void LnkdLst::dltLast() {
 // ** delete a node that's not the head or the last node
 // ** won't work for head or last node *****************
 //******************************************************
-void LnkdLst::dltMid(Node *mid) {
+void VecLst::dltMid(Node *mid) {
     if (head) {
         // make sure it's between two nodes
         if (mid->next && mid !=head) {
@@ -151,7 +151,7 @@ void LnkdLst::dltMid(Node *mid) {
 //**********************************************
 // *** Function removes first instance of n ****
 //**********************************************
-void LnkdLst::remove(int n) {
+void VecLst::remove(int n) {
     Node *prev;
     if(head){
         worker=head;
@@ -170,7 +170,7 @@ void LnkdLst::remove(int n) {
     }
 }
 
-int& LnkdLst::getElementAt(int n) {
+int& VecLst::getElementAt(int n) {
     if (n>=0 && n<size) {
         if (head) {
             worker=head;

@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FE2406801BBE44F8007D2E02 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE24067F1BBE44F8007D2E02 /* main.cpp */; };
-		FE2406881BBE453E007D2E02 /* LnkdLst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE2406861BBE453E007D2E02 /* LnkdLst.cpp */; settings = {ASSET_TAGS = (); }; };
+		FE24068E1BBF8A2E007D2E02 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE24068C1BBF8A2E007D2E02 /* main.cpp */; settings = {ASSET_TAGS = (); }; };
+		FE24068F1BBF8A2E007D2E02 /* VecLst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE24068D1BBF8A2E007D2E02 /* VecLst.cpp */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +27,8 @@
 /* Begin PBXFileReference section */
 		FE24067C1BBE44F8007D2E02 /* Assignment 4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment 4"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE24067F1BBE44F8007D2E02 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		FE2406861BBE453E007D2E02 /* LnkdLst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LnkdLst.cpp; sourceTree = "<group>"; };
-		FE2406871BBE453E007D2E02 /* LnkdLst.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LnkdLst.hpp; sourceTree = "<group>"; };
+		FE24068C1BBF8A2E007D2E02 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		FE24068D1BBF8A2E007D2E02 /* VecLst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VecLst.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +61,8 @@
 		FE24067E1BBE44F8007D2E02 /* Assignment 4 */ = {
 			isa = PBXGroup;
 			children = (
-				FE2406861BBE453E007D2E02 /* LnkdLst.cpp */,
-				FE2406871BBE453E007D2E02 /* LnkdLst.hpp */,
+				FE24068C1BBF8A2E007D2E02 /* main.cpp */,
+				FE24068D1BBF8A2E007D2E02 /* VecLst.cpp */,
 				FE24067F1BBE44F8007D2E02 /* main.cpp */,
 			);
 			path = "Assignment 4";
@@ -123,8 +124,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE2406881BBE453E007D2E02 /* LnkdLst.cpp in Sources */,
+				FE24068F1BBF8A2E007D2E02 /* VecLst.cpp in Sources */,
 				FE2406801BBE44F8007D2E02 /* main.cpp in Sources */,
+				FE24068E1BBF8A2E007D2E02 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

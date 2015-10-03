@@ -9,10 +9,10 @@
 #include <iostream>
 
 // user libraries
-#include "LnkdLst.hpp"
+#include "VecLst.hpp"
 
 int main(int argc, const char * argv[]) {
-    LnkdLst vl(5);
+    VecLst vl(5);
     cout << vl.getSize() << endl;
     vl.append(7);
     vl.append(9);
