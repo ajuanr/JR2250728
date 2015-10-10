@@ -197,7 +197,10 @@ void LnkdLst::insertBefore(int index, int val) {
     if (head) {
         Node *prev;
         worker = head;
-        if(index>0 && index<size) {
+        // index out of range
+        if(index>=this->size || index < 0) return;
+        if(index==0) { prepend(val); }
+        else {//if(index>0 && index<size) {
             int i = 0;
             do {
                 prev = worker;
@@ -215,6 +218,38 @@ void LnkdLst::insertBefore(int index, int val) {
 
 void LnkdLst::insertAfter(int index, int val) {
     if (head) {
-        insertBefore(index+1, val);
+        // trying to insert out of range
+        if(index>=this->size || index < 0) return;
+        
+        if (index==(size-1)) {append(val);}
+        else {insertBefore(index+1, val);}
+    }
+}
+
+void LnkdLst::prepend(int val) {
+    if (head) {
+        Node *clink = new Node;
+        clink->data=val;
+        clink->next = head;
+        head = clink;
+        ++size;
+    }else{
+        Node *clink=new Node;
+        clink->data=val;
+        clink->next=NULL;
+        head=clink;
+        size=1;
+    }
+}
+
+void LnkdLst::print() {
+    if (head) {
+        Node *prev;
+        worker=head;
+        do {
+            prev=worker;
+            cout << prev->data << " ";
+        } while (worker=worker->next);
+    cout << endl;
     }
 }

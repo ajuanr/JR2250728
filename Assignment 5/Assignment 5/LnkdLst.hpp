@@ -17,6 +17,7 @@ public:
     LnkdLst();
     LnkdLst(int);
     void append(int);
+    void prepend(int);
     string toString();
     virtual ~LnkdLst();
     
@@ -32,6 +33,8 @@ public:
     int& last() {return get(size-1);}
     void insertBefore(int, int);
     void insertAfter(int, int);
+    
+    void print();
     
 private:
     struct Node{
