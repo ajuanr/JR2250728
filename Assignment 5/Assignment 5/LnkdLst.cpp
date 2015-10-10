@@ -1,16 +1,16 @@
 //
-//  VecLst.cpp
+//  LnkdLst.cpp
 //  LinkedList
 //
 //
 
-#include "VecLst.hpp"
+#include "LnkdLst.hpp"
 
 #include <sstream>
 
 #include <iostream>
 
-VecLst::VecLst(int n) {
+LnkdLst::LnkdLst(int n) {
     Node *clink=new Node;
     clink->data=n;
     clink->next=NULL;
@@ -18,7 +18,7 @@ VecLst::VecLst(int n) {
     size = 1;
 }
 
-void VecLst::append(int n){
+void LnkdLst::append(int n){
     Node *prev;
     if(head){
         worker=head;
@@ -39,7 +39,7 @@ void VecLst::append(int n){
     }
 }
 
-string VecLst::toString(){
+string LnkdLst::toString(){
     string build="";
     char counter=48;
     if(head){
@@ -57,7 +57,7 @@ string VecLst::toString(){
     return build;
 }
 
-VecLst::~VecLst() {
+LnkdLst::~LnkdLst() {
     if(head){
         worker = head;
         do{
@@ -76,11 +76,11 @@ VecLst::~VecLst() {
 //*****************************************************
 //** Default constructor ****
 //*****************************************************
-VecLst::VecLst() {
+LnkdLst::LnkdLst() {
     head=NULL;
 }
 
-void VecLst::dltHead() {
+void LnkdLst::dltHead() {
     // head is not the only node
     if(head) {
         worker=head;
@@ -99,7 +99,12 @@ void VecLst::dltHead() {
     }
         }
 
-void VecLst::dltCurrent(Node *current) {
+
+//**************************************************************
+// ** function dltCurrent deletes the node passed in ***********
+// ** Check the position of the node to ensure proper deletion *
+//**************************************************************
+void LnkdLst::dltCurrent(Node *current) {
     // current is the head
     if (head) {
         if (current == head) dltHead();
@@ -109,7 +114,7 @@ void VecLst::dltCurrent(Node *current) {
     }
 }
 
-void VecLst::dltLast() {
+void LnkdLst::dltLast() {
     if (head) {
         Node *prev = head;
         worker = head;
@@ -129,11 +134,11 @@ void VecLst::dltLast() {
     }
 }
 
-//******************************************************
-// ** delete a node that's not the head or the last node
-// ** won't work for head or last node *****************
-//******************************************************
-void VecLst::dltMid(Node *mid) {
+//********************************************************
+// ** delete a node that's not the head or the last node *
+// ** won't work for head or last node *******************
+//********************************************************
+void LnkdLst::dltMid(Node *mid) {
     if (head) {
         // make sure it's between two nodes
         if (mid->next && mid !=head) {
@@ -149,9 +154,9 @@ void VecLst::dltMid(Node *mid) {
 }
 
 //**********************************************
-// *** Function removes first instance of n ****
+// *** Function remove, first instance of n ****
 //**********************************************
-void VecLst::remove(int n) {
+void LnkdLst::remove(int n) {
     Node *prev;
     if(head){
         worker=head;
@@ -170,7 +175,10 @@ void VecLst::remove(int n) {
     }
 }
 
-int& VecLst::getElementAt(int n) {
+//*********************************************************
+// ** function get, returns the data in the node passed in *
+//*********************************************************
+int& LnkdLst::get(int n) {
     if (n>=0 && n<size) {
         if (head) {
             worker=head;
@@ -182,4 +190,31 @@ int& VecLst::getElementAt(int n) {
         }
     }
     return head->data;
+}
+
+
+void LnkdLst::insertBefore(int index, int val) {
+    if (head) {
+        Node *prev;
+        worker = head;
+        if(index>0 && index<size) {
+            int i = 0;
+            do {
+                prev = worker;
+                worker=worker->next;
+                ++i;
+            } while (i!=index);
+            Node *clink = new Node;
+            clink->data = val;
+            clink->next = prev->next;
+            prev->next=clink;
+            ++size;
+        }
+    }
+}
+
+void LnkdLst::insertAfter(int index, int val) {
+    if (head) {
+        insertBefore(index+1, val);
+    }
 }
