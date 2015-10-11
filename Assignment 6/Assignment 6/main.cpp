@@ -14,13 +14,16 @@ using namespace std;
 // user libraries
 #include "Stack.h"
 #include "Queue.h"
+#include "DblLst.h"
 
 void testStack();
 void testQueue();
+void testDblList();
 
 int main(int argc, const char * argv[]) {
     //testStack();
-    testQueue();
+    //testQueue();
+    testDblList();
     return 0;
 }
 
@@ -56,5 +59,16 @@ void testQueue() {
     cout << "Pop an element\n";
     q->pop();
     cout << q->toString();
+    cout << endl;
+}
+
+void testDblList() {
+    cout << "Create a new doubly linked list\n";
+    DblLst *db = new DblLst(5);
+    for (int i = 0; i != 2; ++i)
+        db->append(i);
+    cout << db->toString();
+    cout << "\nTraverse the doubly linked list in reverse order\n";
+    cout << db->printBackwards();
     cout << endl;
 }
