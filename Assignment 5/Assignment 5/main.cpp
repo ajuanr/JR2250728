@@ -16,13 +16,12 @@ using namespace std;
 #include "LnkdLst.hpp"
 
 void testing();
-void testCopyConstructor();
 void testTemplate();
 
 int main(int argc, const char * argv[]) {
-//    testing();
-//    testCopyConstructor();
+    testing();
     testTemplate();
+
     return 0;
 }
 
@@ -43,18 +42,23 @@ void testing() {
     cout << "Insert 3 after head: ";
     lst->insertAfter(0, 3);
     lst->print();
-    cout << "Insert after last element: ";
+    cout << "Insert 9 after last element: ";
     lst->insertAfter(lst->getSize()-1, 9);
+    lst->print();
+    cout << "Remove the second element: ";
+    lst->extract(2);
+    lst->print();
     cout << "Prepend 4: ";
     lst->prepend(4);
     lst->print();
-    cout << "Insert 6 at end: ";
+    cout << "Append 6: ";
     lst->append(6);
     lst->print();
     
     cout << endl;
     cout << "First is: " << lst->first() << endl;
     cout << "Last is: " << lst->last() << endl;
+    cout << endl;
     
     cout << "Use copy constructor to create a new LnkdLst, lst2: ";
     LnkdLst<int> *lst2 = new LnkdLst<int>(*lst);
@@ -65,7 +69,7 @@ void testing() {
     cout << "Check to make sure that the new list still exists:  ";
     lst2->print();
     
-    cout << "Create a new list: ";
+    cout << "\nCreate a new list to test assignment operator: ";
     LnkdLst<int> lst3(10);
     lst3.print();
     cout << "Assign lst2 to lst3: ";
@@ -78,34 +82,6 @@ void testing() {
     delete lst2;
     cout << "Deleting lst2\n";
     lst3.print();
-    
-    //newLst->print();
-    //cout << newLst->getSize();
-}
-
-void testCopyConstructor() {
-    cout << "Create a list";
-    LnkdLst<int> lst(0);
-    for(int i = 1; i != 10; ++i) {
-        lst.append(i);
-    }
-    cout << endl;
-    LnkdLst<int> lst2 = lst;
-    cout << "lst:  ";
-    lst.print();
-    cout << "lst2: ";
-    lst2.print();
-    
-    cout << "Modify the new list, leaving the old list the same: ";
-    lst2.prepend(4);
-    lst2.insertAfter(3, 9);
-    cout << endl;
-    cout << "lst:  ";
-    lst.print();
-    cout << "lst2: ";
-    lst2.print();
-    cout << lst2.getSize() << endl;
-
 }
 
 void testTemplate() {
@@ -118,6 +94,10 @@ void testTemplate() {
     cout << "test insertBefore(): ";
     lst->insertBefore(1, "is");
     lst->print();
-    
-
+    cout << "Prepend a node: ";
+    lst->prepend("not");
+    lst->print();
+    cout << "Extract the prepended node: " << endl;
+    cout << "Extracted node is: " << lst->extract(0) << endl;
+    lst->print();
 }
