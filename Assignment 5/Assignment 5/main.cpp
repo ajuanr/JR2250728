@@ -10,10 +10,11 @@
 #include "LnkdLst.hpp"
 
 void testing();
+void testCopyConstructor();
 
 int main(int argc, const char * argv[]) {
     testing();
-
+//    testCopyConstructor();
     return 0;
 }
 
@@ -47,5 +48,39 @@ void testing() {
     cout << "First is: " << lst->first() << endl;
     cout << "Last is: " << lst->last() << endl;
     
+    cout << "Use copy constructor to create a new LnkdLst, lst2: ";
+    LnkdLst *lst2 = new LnkdLst(*lst);
+    lst2->print();
+    
+    cout << "delete the original list\n";
     delete lst;
+    cout << "Check to make sure that the new list still exists:  ";
+    lst2->print();
+    
+    //newLst->print();
+    //cout << newLst->getSize();
+}
+
+void testCopyConstructor() {
+    cout << "Create a list";
+    LnkdLst lst(0);
+    for(int i = 1; i != 10; ++i) {
+        lst.append(i);
+    }
+    cout << endl;
+    LnkdLst lst2 = lst;
+    cout << "lst:  ";
+    lst.print();
+    cout << "lst2: ";
+    lst2.print();
+    
+    cout << "Modify the new list, leaving the old list the same: ";
+    lst2.prepend(4);
+    lst2.insertAfter(3, 9);
+    cout << endl;
+    cout << "lst:  ";
+    lst.print();
+    cout << "lst2: ";
+    lst2.print();
+    cout << lst2.getSize() << endl;
 }

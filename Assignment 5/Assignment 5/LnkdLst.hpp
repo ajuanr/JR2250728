@@ -16,10 +16,12 @@ class LnkdLst {
 public:
     LnkdLst();
     LnkdLst(int);
+    LnkdLst(LnkdLst&); // copy constructor
     void append(int);
     void prepend(int);
     string toString();
     virtual ~LnkdLst();
+    
     
     
     void dltLast();

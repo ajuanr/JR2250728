@@ -18,6 +18,24 @@ LnkdLst::LnkdLst(int n) {
     size = 1;
 }
 
+LnkdLst::LnkdLst(LnkdLst& lst) {
+    Node *headLnk=new Node;
+    headLnk->data=lst.get(0);
+    headLnk->next=NULL;
+    head=headLnk;
+    size = 1;
+    lst.worker = lst.head;
+    this->worker = this->head;
+    while (lst.worker = lst.worker->next) {
+        Node *clink = new Node;
+        clink->data = lst.worker->data;
+        clink->next = NULL;
+        this->worker->next = clink;
+        this->worker = worker->next;
+        ++size;
+    }
+}
+
 void LnkdLst::append(int n){
     Node *prev;
     if(head){
