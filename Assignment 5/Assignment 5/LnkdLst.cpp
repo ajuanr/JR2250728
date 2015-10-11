@@ -271,3 +271,25 @@ void LnkdLst::print() {
     cout << endl;
     }
 }
+
+LnkdLst& LnkdLst::operator=(LnkdLst &rhs) {
+    // guard against self-assignment
+    if (&rhs != this) {
+        Node *headLnk=new Node;
+        headLnk->data=rhs.get(0);
+        headLnk->next=NULL;
+        head=headLnk;
+        size = 1;
+        rhs.worker = rhs.head;
+        this->worker = this->head;
+        while (rhs.worker = rhs.worker->next) {
+            Node *clink = new Node;
+            clink->data = rhs.worker->data;
+            clink->next = NULL;
+            this->worker->next = clink;
+            this->worker = worker->next;
+            ++size;
+        }
+    }
+    return *this;
+}

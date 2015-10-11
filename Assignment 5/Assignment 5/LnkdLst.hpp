@@ -38,6 +38,8 @@ public:
     
     void print();
     
+    LnkdLst& operator=(LnkdLst&);
+    
 private:
     struct Node{
         int data;
