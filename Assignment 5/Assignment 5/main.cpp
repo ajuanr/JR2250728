@@ -57,11 +57,18 @@ void testing() {
     cout << "Check to make sure that the new list still exists:  ";
     lst2->print();
     
+    cout << "Create a new list: ";
     LnkdLst lst3(10);
     lst3.print();
+    cout << "Assign lst2 to lst3: ";
     lst3 = *lst2;
     lst3.print();
+    cout << "Make sure self-assignemt works: ";
+    LnkdLst *lst3Ptr = &lst3;
+    lst3 = *lst3Ptr;
+    lst3.print();
     delete lst2;
+    cout << "Deleting lst2\n";
     lst3.print();
     
     //newLst->print();
