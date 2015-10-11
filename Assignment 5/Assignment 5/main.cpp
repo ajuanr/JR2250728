@@ -57,6 +57,13 @@ void testing() {
     cout << "Check to make sure that the new list still exists:  ";
     lst2->print();
     
+    LnkdLst lst3(10);
+    lst3.print();
+    lst3 = *lst2;
+    lst3.print();
+    delete lst2;
+    lst3.print();
+    
     //newLst->print();
     //cout << newLst->getSize();
 }
@@ -83,4 +90,6 @@ void testCopyConstructor() {
     cout << "lst2: ";
     lst2.print();
     cout << lst2.getSize() << endl;
+    
+
 }
