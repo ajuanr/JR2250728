@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		FE46582C1BC848F1005E2065 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE46582B1BC848F1005E2065 /* main.cpp */; };
-		FE4658341BC8493C005E2065 /* LnkdLst.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE4658321BC8493C005E2065 /* LnkdLst.cpp */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,8 +25,7 @@
 /* Begin PBXFileReference section */
 		FE4658281BC848F1005E2065 /* Assignment 5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Assignment 5"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE46582B1BC848F1005E2065 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		FE4658321BC8493C005E2065 /* LnkdLst.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LnkdLst.cpp; sourceTree = "<group>"; };
-		FE4658331BC8493C005E2065 /* LnkdLst.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LnkdLst.hpp; sourceTree = "<group>"; };
+		FEA6506C1BCAC18A005F3260 /* LnkdLst.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = LnkdLst.hpp; path = ../../../../.Trash/LnkdLst.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +58,7 @@
 		FE46582A1BC848F1005E2065 /* Assignment 5 */ = {
 			isa = PBXGroup;
 			children = (
-				FE4658321BC8493C005E2065 /* LnkdLst.cpp */,
-				FE4658331BC8493C005E2065 /* LnkdLst.hpp */,
+				FEA6506C1BCAC18A005F3260 /* LnkdLst.hpp */,
 				FE46582B1BC848F1005E2065 /* main.cpp */,
 			);
 			path = "Assignment 5";
@@ -123,7 +120,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE4658341BC8493C005E2065 /* LnkdLst.cpp in Sources */,
 				FE46582C1BC848F1005E2065 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +237,7 @@
 				FE4658311BC848F1005E2065 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

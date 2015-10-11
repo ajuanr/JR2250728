@@ -6,20 +6,28 @@
 //  Copyright © 2015 Juan Ruiz. All rights reserved.
 //
 
+// system libraries
 #include <iostream>
+#include <string>
+
+using namespace std;
+
+// user libraries
 #include "LnkdLst.hpp"
 
 void testing();
 void testCopyConstructor();
+void testTemplate();
 
 int main(int argc, const char * argv[]) {
-    testing();
+//    testing();
 //    testCopyConstructor();
+    testTemplate();
     return 0;
 }
 
 void testing() {
-    LnkdLst *lst = new LnkdLst(10);
+    LnkdLst<int> *lst = new LnkdLst<int>(10);
     cout << "New list: ";
     lst->print();
     cout << "Add some nodes: ";
@@ -49,7 +57,7 @@ void testing() {
     cout << "Last is: " << lst->last() << endl;
     
     cout << "Use copy constructor to create a new LnkdLst, lst2: ";
-    LnkdLst *lst2 = new LnkdLst(*lst);
+    LnkdLst<int> *lst2 = new LnkdLst<int>(*lst);
     lst2->print();
     
     cout << "delete the original list\n";
@@ -58,13 +66,13 @@ void testing() {
     lst2->print();
     
     cout << "Create a new list: ";
-    LnkdLst lst3(10);
+    LnkdLst<int> lst3(10);
     lst3.print();
     cout << "Assign lst2 to lst3: ";
     lst3 = *lst2;
     lst3.print();
     cout << "Make sure self-assignemt works: ";
-    LnkdLst *lst3Ptr = &lst3;
+    LnkdLst<int> *lst3Ptr = &lst3;
     lst3 = *lst3Ptr;
     lst3.print();
     delete lst2;
@@ -77,12 +85,12 @@ void testing() {
 
 void testCopyConstructor() {
     cout << "Create a list";
-    LnkdLst lst(0);
+    LnkdLst<int> lst(0);
     for(int i = 1; i != 10; ++i) {
         lst.append(i);
     }
     cout << endl;
-    LnkdLst lst2 = lst;
+    LnkdLst<int> lst2 = lst;
     cout << "lst:  ";
     lst.print();
     cout << "lst2: ";
@@ -97,6 +105,19 @@ void testCopyConstructor() {
     cout << "lst2: ";
     lst2.print();
     cout << lst2.getSize() << endl;
+
+}
+
+void testTemplate() {
+    cout << "\nTest templated lnkLst: ";
+    LnkdLst<string> *lst = new LnkdLst<string>("this");
+    lst->print();
+    cout << "Append to list: ";
+    lst->append("working");
+    lst->print();
+    cout << "test insertBefore(): ";
+    lst->insertBefore(1, "is");
+    lst->print();
     
 
 }
