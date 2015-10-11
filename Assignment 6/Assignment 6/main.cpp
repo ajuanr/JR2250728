@@ -20,7 +20,7 @@ void testQueue();
 
 int main(int argc, const char * argv[]) {
     //testStack();
-    testStack();
+    testQueue();
     return 0;
 }
 
@@ -43,7 +43,7 @@ void testStack() {
 
 
 void testQueue() {
-    cout << "Create new stack\n";
+    cout << "Create new queue\n";
     Queue<string> *q = new Queue<string>("This");
     cout << q->toString() << endl;
     

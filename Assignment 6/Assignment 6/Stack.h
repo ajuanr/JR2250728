@@ -32,7 +32,6 @@ private:
     Node *worker;
 
     T dltHead();
-    
 };
 
 template<class T>

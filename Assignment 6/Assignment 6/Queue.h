@@ -31,8 +31,6 @@ private:
     Node *head;
     Node *worker;
     
-    T dltHead();
-    
 };
 
 template<class T>
@@ -116,27 +114,5 @@ T Queue<T>::pop() {
     return NULL;
 }
 
-//template<class T>
-//T Queue<T>::pop() {
-//    if (head) {
-//        T temp;
-//        Node *prev = head;
-//        worker = head;
-//        while (worker=worker->next) {
-//            if (worker->next) prev=worker;
-//        }
-//        // last node is the only node
-//        if (prev == head) {
-//            temp = dltHead();
-//        }
-//        else {
-//            temp = prev->data;
-//            prev->next=NULL;
-//            delete worker;
-//        }
-//        return temp;
-//    }
-//    return NULL;
-//}
 
 #endif /* Queue_h */

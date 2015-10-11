@@ -27,6 +27,7 @@
 		FEA6507A1BCAE325005F3260 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		FEA650811BCAE34B005F3260 /* Stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		FEA650821BCAFDC0005F3260 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
+		FECF46591BCB0B2F00AB8135 /* DblList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DblList.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 			children = (
 				FEA6507A1BCAE325005F3260 /* main.cpp */,
 				FEA650811BCAE34B005F3260 /* Stack.h */,
+				FECF46591BCB0B2F00AB8135 /* DblList.h */,
 				FEA650821BCAFDC0005F3260 /* Queue.h */,
 			);
 			path = "Assignment 6";
@@ -239,6 +241,7 @@
 				FEA650801BCAE325005F3260 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
