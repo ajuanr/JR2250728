@@ -28,6 +28,7 @@
 		FEA650811BCAE34B005F3260 /* Stack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		FEA650821BCAFDC0005F3260 /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		FECF46591BCB0B2F00AB8135 /* DblLst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DblLst.h; sourceTree = "<group>"; };
+		FECF465A1BCB857100AB8135 /* CircLst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircLst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 				FEA650811BCAE34B005F3260 /* Stack.h */,
 				FECF46591BCB0B2F00AB8135 /* DblLst.h */,
 				FEA650821BCAFDC0005F3260 /* Queue.h */,
+				FECF465A1BCB857100AB8135 /* CircLst.h */,
 			);
 			path = "Assignment 6";
 			sourceTree = "<group>";

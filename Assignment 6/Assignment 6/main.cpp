@@ -7,6 +7,8 @@
 //
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <string>
 
 using namespace std;
@@ -15,15 +17,20 @@ using namespace std;
 #include "Stack.h"
 #include "Queue.h"
 #include "DblLst.h"
+#include "CircLst.h"
 
 void testStack();
 void testQueue();
 void testDblList();
+void testCircLst();
 
 int main(int argc, const char * argv[]) {
+    // seed random number generator
+    srand(static_cast<unsigned int>(time(0)));
     //testStack();
     //testQueue();
-    testDblList();
+    //testDblList();
+    testCircLst();
     return 0;
 }
 
@@ -42,6 +49,8 @@ void testStack() {
     s->pop();
     cout << s->toString();
     cout << endl;
+    
+    delete s;
 }
 
 
@@ -60,15 +69,24 @@ void testQueue() {
     q->pop();
     cout << q->toString();
     cout << endl;
+    
+    delete q;
 }
 
 void testDblList() {
     cout << "Create a new doubly linked list\n";
-    DblLst *db = new DblLst(5);
-    for (int i = 0; i != 2; ++i)
-        db->append(i);
+    DblLst<int> *db = new DblLst<int>(rand()%100+1);
+    for (int i = 0; i != 4; ++i)
+        db->append(rand()%100+1);
     cout << db->toString();
     cout << "\nTraverse the doubly linked list in reverse order\n";
     cout << db->printBackwards();
     cout << endl;
+    
+    delete db;
+}
+
+void testCircLst() {
+    cout << "Create a circularly linked list\n";
+    CircLst *clst = new CircLst(rand()%100+1);
 }

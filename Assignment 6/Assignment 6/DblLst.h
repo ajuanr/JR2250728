@@ -9,11 +9,11 @@
 #ifndef DblList_h
 #define DblList_h
 
-
+template<class T>
 class DblLst {
 public:
-    DblLst(int);
-    void append(int);
+    DblLst(T);
+    void append(T);
     string toString();
     virtual ~DblLst();
     
@@ -21,7 +21,7 @@ public:
     
 private:
     struct Node{
-        int data;
+        T data;
         Node *next;
         Node *prev;
     };
@@ -31,7 +31,8 @@ private:
     int dltHead();
 };
 
-DblLst::DblLst(int n) {
+template<class T>
+DblLst<T>::DblLst(T n) {
     Node *clink=new Node;
     clink->data=n;
     clink->next=NULL;
@@ -39,7 +40,8 @@ DblLst::DblLst(int n) {
     head=clink;
 }
 
-void DblLst::append(int n){
+template<class T>
+void DblLst<T>::append(T n){
     if(head){
         Node *ante;
         worker=head;
@@ -60,7 +62,8 @@ void DblLst::append(int n){
     }
 }
 
-string DblLst::toString(){
+template<class T>
+string DblLst<T>::toString(){
     string build="";
     char counter=48;
     if(head){
@@ -78,7 +81,8 @@ string DblLst::toString(){
     return build;
 }
 
-string DblLst::printBackwards() {
+template<class T>
+string DblLst<T>::printBackwards() {
     string build="";
     if (head) {
         Node *ante;
@@ -101,7 +105,8 @@ string DblLst::printBackwards() {
     return build;
 }
 
-DblLst::~DblLst() {
+template<class T>
+DblLst<T>::~DblLst() {
     if(head){
         do{
             worker=head;

@@ -5,8 +5,6 @@
 //
 
 #include "LnkdLst.hpp"
-
-#include "LnkdLst.hpp"
 #include <sstream>
 
 #include <iostream>
@@ -124,10 +122,10 @@ void LnkdLst::dltMid(Node *mid) {
         // make sure it's between two nodes
         if (mid->next && mid !=head) {
             worker = mid->next;
-        
+
             mid->data = worker->data;
             mid->next = worker->next;
-        
+
             delete worker;
         }
     }
@@ -151,7 +149,7 @@ void LnkdLst::remove(int n) {
 //            if (prev == head) dltHead();
 //            else if (!prev->next) dltLast();
 //            else dltMid(prev);
-            
+
         }
     }
 }
