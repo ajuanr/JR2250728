@@ -109,5 +109,8 @@ void testPriorityQ() {
     for (int i = 0; i !=5; ++i) {
         pq->push(rand()%20+1);
     }
-    cout <<pq->toString();
+    cout <<pq->toString() << endl;
+    cout << "Remove element with highest priority\n";
+    pq->pop();
+    cout << pq->toString() << endl;;
 }

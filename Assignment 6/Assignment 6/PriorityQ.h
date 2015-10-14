@@ -54,7 +54,6 @@ void PriorityQ<T>::push(T n){
             prepend(n);
         }
         else{
-            cout << "Insert before\n";
             insertAfter(n);
 //        Node *clink=new Node;
 //        clink->data=n;
@@ -121,7 +120,6 @@ T PriorityQ<T>::pop() {
 
 template<class T>
 void PriorityQ<T>::prepend(T val) {
-    cout << "in prepend\n";
     if (head) {
         Node *clink = new Node;
         clink->data=val;
@@ -137,11 +135,10 @@ void PriorityQ<T>::prepend(T val) {
 
 template<class T>
 void PriorityQ<T>::insertAfter(T n) {
-    cout << "In insert before\n";
     worker = head;
     Node *prev = worker;
-    while(((worker=worker->next) && (worker->next)->data > n)) {
-        prev=worker->next;
+    while(((worker=worker->next) && (worker->data) > n)) {
+        prev=worker;
     }
     if(prev->next) {
             Node *clink=new Node;
