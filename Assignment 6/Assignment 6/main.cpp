@@ -90,8 +90,10 @@ void testCircLst() {
     cout << "Create a circularly linked list\n";
     CircLst *cLst = new CircLst(rand()%100+1);
     cout << cLst->toString();
+    
     cout << "Append to the list\n";
-    cLst->append(rand()%100+1);
+    for (int i = 0; i != 2; ++i)
+        cLst->append(rand()%100+1);
     cout << cLst->toString();
     
     delete cLst;

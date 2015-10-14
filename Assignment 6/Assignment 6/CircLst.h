@@ -80,12 +80,17 @@ string CircLst::toString(){
 
 CircLst::~CircLst() {
     if(head){
-        worker = head;
-        do{
-            worker=head;
-            head=head->next;
+        worker = head->next;
+        Node *post = worker;
+        
+        while (worker != head) {
+            post = post->next;
             delete worker;
-        }while(head);
+            worker = post;
+        }
+        // delete the head last
+        delete head;//if (worker==head){cout << "Deleting head\n";delete head;}
+        
     }
 }
 
