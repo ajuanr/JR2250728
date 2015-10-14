@@ -9,6 +9,10 @@
 #ifndef CircLst_h
 #define CircLst_h
 
+#include <string>
+#include <sstream>
+using namespace std;
+
 class CircLst {
 public:
     CircLst(int);
@@ -17,12 +21,10 @@ public:
     virtual ~CircLst();
     
     
-    void dltLast();
-    void dltHead();
+//    void dltLast();
+//    void dltHead();
     
-    void testDltLast();
-    
-    void remove(int);
+//    void remove(int);
 private:
     struct Node{
         int data;
@@ -35,8 +37,8 @@ private:
 CircLst::CircLst(int n) {
     Node *clink=new Node;
     clink->data=n;
-    clink->next=head;
     head=clink;
+    clink->next=head;
 }
 
 void CircLst::append(int n){
@@ -48,7 +50,7 @@ void CircLst::append(int n){
         }while((worker=worker->next) !=head);
         Node *clink=new Node;
         clink->data=n;
-        clink->next=NULL;
+        clink->next=head;
         prev->next=clink;
     }else{
         Node *clink=new Node;
@@ -58,5 +60,33 @@ void CircLst::append(int n){
     }
 }
 
+string CircLst::toString(){
+    string build="";
+    if(head){
+        worker=head;
+        do{
+            build+=("Data element in the list ->");
+            stringstream ss;
+            ss<<worker->data;
+            string data;
+            ss>>data;
+            build+=data;
+            build+="\n";
+            worker=worker->next;
+        }while(worker!=head);
+    }
+    return build;
+}
+
+CircLst::~CircLst() {
+    if(head){
+        worker = head;
+        do{
+            worker=head;
+            head=head->next;
+            delete worker;
+        }while(head);
+    }
+}
 
 #endif /* CircLst_h */

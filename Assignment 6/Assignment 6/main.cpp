@@ -88,5 +88,11 @@ void testDblList() {
 
 void testCircLst() {
     cout << "Create a circularly linked list\n";
-    CircLst *clst = new CircLst(rand()%100+1);
+    CircLst *cLst = new CircLst(rand()%100+1);
+    cout << cLst->toString();
+    cout << "Append to the list\n";
+    cLst->append(rand()%100+1);
+    cout << cLst->toString();
+    
+    delete cLst;
 }
