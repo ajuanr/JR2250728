@@ -114,5 +114,4 @@ T Queue<T>::pop() {
     return NULL;
 }
 
-
 #endif /* Queue_h */

@@ -89,7 +89,7 @@ CircLst::~CircLst() {
             worker = post;
         }
         // delete the head last
-        delete head;//if (worker==head){cout << "Deleting head\n";delete head;}
+        delete head;
         
     }
 }
