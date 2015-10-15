@@ -46,19 +46,12 @@ void SrtdLst<T>::push(T n){
     Node *prev;
     if(head){
         worker=head;
-//        do{
-//            prev=worker;
-//        }while(worker=worker->next);
-        // add elements with largest in the front
+
         if (n >= worker->data) {
             prepend(n);
         }
         else{
             insertAfter(n);
-//        Node *clink=new Node;
-//        clink->data=n;
-//        clink->next=NULL;
-//        head=clink;
         }
     }
 }

@@ -19,22 +19,59 @@ using namespace std;
 #include "DblLst.h"
 #include "CircLst.h"
 #include "SrtdLst.h"
+#include "PriorityQ.h"
 
+
+void Menu();
+int getN();
+void def(int);
 void testStack();
 void testQueue();
 void testDblList();
 void testCircLst();
 void testSrtdLst();
+void testPriorityQ();
 
 int main(int argc, const char * argv[]) {
     // seed random number generator
     srand(static_cast<unsigned int>(time(0)));
-    //testStack();
-    //testQueue();
-    //testDblList();
-//    testCircLst();
-    testSrtdLst();
+    int inN;
+    do{
+        Menu();
+        inN=getN();
+        switch(inN){
+            case 1:    testStack();;cout << endl;break;
+            case 2:    testQueue();cout << endl;break;
+            case 3:    testDblList();cout << endl;break;
+            case 4:    testCircLst();cout << endl;break;
+            case 5:    testSrtdLst();cout << endl;break;
+            case 6:    testPriorityQ();cout << endl;break;
+            default:   def(inN);
+        }
+    } while(inN<7);
     return 0;
+}
+
+void Menu()
+{
+    cout<<"Type 1 to look at stack"<<endl;
+    cout<<"Type 2 to look at queue"<<endl;
+    cout<<"Type 3 to look at doubly linked list"<<endl;
+    cout<<"Type 4 to look at circularly linked list"<<endl;
+    cout<<"Type 5 to look at sorted list"<<endl;
+    cout<<"Type 6 to look at priority queue"<<endl;
+    cout<<"Type 7 to exit \n"<<endl;
+}
+int getN()
+{
+    int inN;
+    cin>>inN;
+    return inN;
+}
+
+void def(int inN)
+{
+    cout<<"You typed "<<inN<<" to exit the program"<<endl;
 }
 
 void testStack() {
@@ -110,7 +147,22 @@ void testSrtdLst() {
         pq->push(rand()%20+1);
     }
     cout <<pq->toString() << endl;
-    cout << "Remove element with highest priority\n";
-    pq->pop();
+}
+
+void testPriorityQ() {
+    cout << "Create new priority queue\n";
+    PriorityQ<int> *pq = new PriorityQ<int>(12);
+    cout << pq->toString() << endl;
+    cout << "Append some data\n";
+    for (int i = 0; i !=5; ++i) {
+        pq->push(rand()%50+1);
+    }
+    cout <<pq->toString() << endl;
+    cout << "Remove nodes with highest priority\n";
+    cout << "Popped: " << pq->pop() << endl;
+    cout << "Popped: " << pq->pop() << endl;
+    cout << "Popped: " << pq->pop() << endl;
+    cout << endl;
+    cout << "Remaining nodes\n";
     cout << pq->toString() << endl;;
 }
