@@ -1,24 +1,24 @@
 //
-//  PriorityQ.h
+//  SrtdLst.h
 //  Assignment 6
 //
 //  Created by Juan on 10/13/15.
 //  Copyright © 2015 Juan. All rights reserved.
 //
 
-#ifndef PriorityQ_h
-#define PriorityQ_h
+#ifndef SrtdLst_h
+#define SrtdLst_h
 
 using namespace std;
 
 template<class T>
-class PriorityQ {
+class SrtdLst {
 public:
-    PriorityQ(T);
+    SrtdLst(T);
     void push(T);
     T pop();
     string toString();
-    virtual ~PriorityQ();
+    virtual ~SrtdLst();
     
 private:
     struct Node{
@@ -34,7 +34,7 @@ private:
 };
 
 template<class T>
-PriorityQ<T>::PriorityQ(T n) {
+SrtdLst<T>::SrtdLst(T n) {
     Node *clink=new Node;
     clink->data=n;
     clink->next=NULL;
@@ -42,7 +42,7 @@ PriorityQ<T>::PriorityQ(T n) {
 }
 
 template<class T>
-void PriorityQ<T>::push(T n){
+void SrtdLst<T>::push(T n){
     Node *prev;
     if(head){
         worker=head;
@@ -64,7 +64,7 @@ void PriorityQ<T>::push(T n){
 }
 
 template<class T>
-string PriorityQ<T>::toString(){
+string SrtdLst<T>::toString(){
     string build="";
     char counter=48;
     if(head){
@@ -83,7 +83,7 @@ string PriorityQ<T>::toString(){
 }
 
 template<class T>
-PriorityQ<T>::~PriorityQ() {
+SrtdLst<T>::~SrtdLst() {
     if(head){
         worker = head;
         do{
@@ -95,7 +95,7 @@ PriorityQ<T>::~PriorityQ() {
 }
 
 template<class T>
-T PriorityQ<T>::pop() {
+T SrtdLst<T>::pop() {
     // head is not the only node
     if(head) {
         worker=head;
@@ -112,14 +112,14 @@ T PriorityQ<T>::pop() {
         }
         return temp;
     }
-    // PriorityQ was empty
+    // SrtdLst was empty
     return NULL;
 }
 
 
 
 template<class T>
-void PriorityQ<T>::prepend(T val) {
+void SrtdLst<T>::prepend(T val) {
     if (head) {
         Node *clink = new Node;
         clink->data=val;
@@ -134,7 +134,7 @@ void PriorityQ<T>::prepend(T val) {
 }
 
 template<class T>
-void PriorityQ<T>::insertAfter(T n) {
+void SrtdLst<T>::insertAfter(T n) {
     worker = head;
     Node *prev = worker;
     while(((worker=worker->next) && (worker->data) > n)) {
@@ -152,4 +152,4 @@ void PriorityQ<T>::insertAfter(T n) {
     }
 }
 
-#endif /* PriorityQ_h */
+#endif /* SrtdLst_h */

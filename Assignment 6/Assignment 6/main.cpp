@@ -18,13 +18,13 @@ using namespace std;
 #include "Queue.h"
 #include "DblLst.h"
 #include "CircLst.h"
-#include "PriorityQ.h"
+#include "SrtdLst.h"
 
 void testStack();
 void testQueue();
 void testDblList();
 void testCircLst();
-void testPriorityQ();
+void testSrtdLst();
 
 int main(int argc, const char * argv[]) {
     // seed random number generator
@@ -33,7 +33,7 @@ int main(int argc, const char * argv[]) {
     //testQueue();
     //testDblList();
 //    testCircLst();
-    testPriorityQ();
+    testSrtdLst();
     return 0;
 }
 
@@ -102,9 +102,9 @@ void testCircLst() {
     delete cLst;
 }
 
-void testPriorityQ() {
+void testSrtdLst() {
     cout << "Create a new priority queue\n";
-        PriorityQ<int> *pq = new PriorityQ<int>(5);
+        SrtdLst<int> *pq = new SrtdLst<int>(5);
     cout << "Append some data\n";
     for (int i = 0; i !=5; ++i) {
         pq->push(rand()%20+1);
