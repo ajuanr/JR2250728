@@ -19,6 +19,7 @@ using namespace std;
 
 void fill(vector<int>&, int, int = 9);
 void printArray(vector<int>&, int=100);
+float median(const vector<int>&);
 void mode(const vector<int>&);
 int max(const map<int,int>);
 
@@ -44,11 +45,11 @@ int main(int argc, const char * argv[]) {
     if (!v.empty()) {
         // sort the array to get the mode, original vector will be lost
         sort(v.begin(), v.end());
-        printArray(v, perLine);
+        printArray(v);
         cout<<"Mean: "<<accumulate(v.begin(), v.end(), 0.0) / v.size()
              << endl;
-        cout << "Median: " << ((size%2==0) ? v[size/2]: v[size/2+1]);
-    mode(v);
+        cout << "Median: " << median(v) << endl;
+        mode(v);
     }
     else
         cout << "No data was input\n";
@@ -72,6 +73,15 @@ void printArray(vector<int>& a, int p) {
             cout << endl;
     }
     cout << endl;
+}
+
+float median(const vector<int>& v) {
+    int mid = v.size()/2;
+    if (v.size() %2 == 0){
+        return (v[mid] + v[mid-1])/2.0;
+    }
+    else
+        return v[mid];
 }
 
 void mode(const vector<int>& v) {
