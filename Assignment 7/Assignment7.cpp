@@ -43,9 +43,6 @@ int main(int argc, const char * argv[]) {
     printArray(v, perLine);
     
     if (!v.empty()) {
-        // sort the array to get the mode, original vector will be lost
-        sort(v.begin(), v.end());
-        printArray(v);
         cout<<"Mean: "<<accumulate(v.begin(), v.end(), 0.0) / v.size()
              << endl;
         cout << "Median: " << median(v) << endl;
@@ -62,7 +59,7 @@ void fill(vector<int>& a, int size, int mod) {
     // use current time as seed for random number generator
     srand(static_cast<unsigned int>(time(0)));
     for (int i = 0; i != size; ++i) {
-        a.push_back(i%mod+1);//rand() % mod + 1);
+        a.push_back(rand() % mod + 1);
     }
 }
 
@@ -75,7 +72,9 @@ void printArray(vector<int>& a, int p) {
     cout << endl;
 }
 
-float median(const vector<int>& v) {
+float median(const vector<int>& in) {
+    vector<int> v = in;
+    sort(v.begin(),v.end());
     int mid = v.size()/2;
     if (v.size() %2 == 0){
         return (v[mid] + v[mid-1])/2.0;
@@ -86,10 +85,6 @@ float median(const vector<int>& v) {
 
 void mode(const vector<int>& v) {
     set<int> s(v.begin(), v.end());
-    
-    cout << "\nNumbers in set:\n";
-    copy(s.begin(), s.end(), ostream_iterator<int>(cout, " "));
-    cout << endl;
     
     map<int, int> m;
     
@@ -105,14 +100,9 @@ void mode(const vector<int>& v) {
     for (vector<int>::const_iterator it=v.begin(); it != v.end(); ++it) {
         ++m[*it];
     }
-    cout << endl;
-    
-    for (mapIt it=m.begin(); it != m.end(); ++it) {
-        cout << "key: " << it->first << " value: " << it->second << " ";
-    }
-    cout << endl;
+
     int maxVal = max(m);
-    cout << maxVal << endl;
+
     // if max is 1, then no number is repeated
     if (maxVal==1) {
         cout << "Mode: {0}";
