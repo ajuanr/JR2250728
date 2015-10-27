@@ -88,11 +88,8 @@ void mode(const vector<int>& v) {
     
     map<int, int> m;
     
-    typedef set<int>::iterator setIt;
-    typedef map<int, int>::iterator mapIt;
-    
     // add the keys to the map
-    for(setIt it = s.begin(); it != s.end(); ++it) {
+    for(set<int>::iterator it = s.begin(); it != s.end(); ++it) {
         m[*it];//.insert({*it, 0});
     }
     
@@ -110,7 +107,7 @@ void mode(const vector<int>& v) {
     
     else {
         cout << "Mode: { ";
-        for (mapIt it = m.begin(); it != m.end(); ++it) {
+        for (map<int, int>::iterator it = m.begin(); it != m.end(); ++it) {
             if (it->second == maxVal) {
                 cout << it->first << " ";
             }
