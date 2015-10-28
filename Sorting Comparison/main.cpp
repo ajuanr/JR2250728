@@ -18,7 +18,13 @@ void quicksortAnalysis();
 void mergesortAnalysis();
 void heapsortAnalysis();
 
-int main(){    
+int main(){
+    int eq; // =
+    int lop; // ==, <, <=, >, >=
+    int lsa; // +, -, *, /
+    int add; // []
+    eq=lop=lsa=add=0;
+    
     cout << "quicksort Analysis: " << endl;
     quicksortAnalysis();
     cout << endl;
@@ -26,12 +32,9 @@ int main(){
     mergesortAnalysis();
     cout << endl;
     cout << "Heapsort analysis" << endl;
+    heapsortAnalysis();
     
-    int eq; // =
-    int lop; // ==, <, <=, >, >=
-    int lsa; // +, -, *, /
-    int add; // []
-    eq=lop=lsa=add=0;
+
 
     
     return 0;
@@ -330,7 +333,7 @@ void heapsortAnalysis() {
     filAray(test2, DBLSIZE);
     eq=lop=lsa=add=0;
     
-    heapsort(test, SIZE, eq,lop,lsa,add);
+    heapsort(test2, DBLSIZE, eq,lop,lsa,add);
     int total2=eq+lop+lsa+add;
     cout<<"Size of the array to sort = "<<DBLSIZE<<endl;
     cout<<"Total number of operations = "<<total2 << endl;
