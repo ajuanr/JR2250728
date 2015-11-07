@@ -6,9 +6,15 @@
 //  Copyright © 2015 Juan Ruiz. All rights reserved.
 //
 
+// system libraries
 #include <iostream>
 
+// user libraries
+#include "Grid.hpp"
+
 int main(int argc, const char * argv[]) {
-    std::cout << "Hello, World!\n";
+    Grid *area = new Grid();
+    area->init();
+    area->print();
     return 0;
 }
