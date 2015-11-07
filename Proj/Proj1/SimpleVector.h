@@ -19,16 +19,6 @@ using namespace std;
 template <class T>
 class SimpleVector
 {
-private:
-    T *aPtr;          // To point to the allocated array
-    int avail;        // points to one past last element pushed
-    int arraySize;    // Total number of elements in the array
-    void memError();  // Handles memory allocation errors
-    void subError();  // Handles subscripts out of range
-    
-    void create(int); // create a SimpleVector
-    void expand();    // double the size of the SimpleVector
-    
 public:
     typedef T* iterator;
     typedef const T* const_iterator;
@@ -71,6 +61,15 @@ public:
     const_iterator end() const {return aPtr+avail;}
     
     void print() const;
+private:
+    iterator aPtr;          // To point to the allocated array
+    int avail;        // points to one past last element pushed
+    int arraySize;    // Total number of elements in the array
+    void memError();  // Handles memory allocation errors
+    void subError();  // Handles subscripts out of range
+    
+    void create(int); // create a SimpleVector
+    void expand();    // double the size of the SimpleVector
     
 };
 

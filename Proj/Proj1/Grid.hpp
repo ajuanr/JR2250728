@@ -15,7 +15,7 @@ class Grid{
 public:
     typedef SimpleVector<SimpleVector<int> > ss; // 2d vector
     
-    Grid(int=10);
+    Grid(int size=10){this->size=size;}
     void init();
     void setMines();
     void print() const;
