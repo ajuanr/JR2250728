@@ -13,16 +13,18 @@
 
 class Grid{
 public:
-    typedef SimpleVector<SimpleVector<int> > ss; // 2d vector
+    typedef SimpleVector<SimpleVector<short> > ss; // 2d vector
+    typedef SimpleVector<short> sv;
     
-    Grid(int size=10){this->size=size;}
+    Grid(short size=10){this->size=size;}
     void init();
-    void setMines();
+    void setMines(short=20);
     void print() const;
+    void prntObscr();
 private:
     ss grid;
     short size; // grid will have area size x size
     
-    enum Flag {EMPTY=10, MINE, CLEAR, LOSER};
+    enum Flag {EMPTY=10, MINE=87, CLEAR, LOSER};
 };
 #endif /* Grid_hpp */

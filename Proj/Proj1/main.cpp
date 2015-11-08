@@ -15,6 +15,9 @@
 int main(int argc, const char * argv[]) {
     Grid *area = new Grid();
     area->init();
+    area->setMines();
     area->print();
+    
+    delete area;
     return 0;
 }
