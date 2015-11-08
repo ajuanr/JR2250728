@@ -16,9 +16,10 @@ public:
     typedef SimpleVector<SimpleVector<short> > ss; // 2d vector
     typedef SimpleVector<short> sv;
     
-    Grid(short size=10){this->size=size;}
+    Grid(short size=10);
     void init();
-    void setMines(short=20);
+    void create();
+    void setMines();
     void print() const;
     void prntObscr() const;
     void prntClr() const;
@@ -31,8 +32,9 @@ private:
     short size; // grid will have area size x size
     
     // utility functions
-    void nAdjacent(short, short, Flag);
+    short nAdjacent(short, short, Flag=MINE) const;
     void setFlags();
+    bool isClear(short, short) const;
     
 };
 #endif /* Grid_hpp */

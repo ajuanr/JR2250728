@@ -15,7 +15,21 @@
 // User Libraries
 #include "Grid.hpp"
 
+Grid::Grid(short size):size(size) {
+    // want to avoid negative size
+    if (size < 2) {
+        size = 10;
+    }
+    init();
+}
+
 void Grid::init() {
+    create();
+    setMines();
+    prntObscr();
+}
+
+void Grid::create() {
     for(int i = 0; i != 10; i++) {
         grid.push_back(SimpleVector<short>());
         for(int j = 0; j != 10; j++) {
@@ -38,10 +52,12 @@ void Grid::print() const {
     std::cout << endl;
 }
 
-void Grid::setMines(short n) {
+void Grid::setMines() {
     srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
-    short mines = n;
+    /// 20 percent of grid is composed of mines
+    short mines = size*2/10;
+    (mines<1)?mines=1: mines=mines;
     
     /// keep looping through minefield until all mines are set
     typedef sv::iterator iv;
@@ -98,17 +114,15 @@ void Grid::prntObscr() const{
 /// Functions prints the minefield with all the squares revealed.
 /// used mostly after player loses
 void Grid::prntClr() const{
-    typedef ss::const_iterator css;
-    typedef sv::const_iterator csv;
-    for (css row = grid->begin(); row != grid->end(); ++row){
-        for (csv col = row->begin(); col != row->end(); ++col) {
+    for (short row = 0; row != size; ++row){
+        for (short col = 0; col != size; ++col) {
             ///
-            if ( *col == LOSER)
+            if ( grid[row][col] == LOSER)
                 cout << "T  ";
-            else if (*col == MINE)
+            else if( grid[row][col] == MINE)
                 cout << "x  ";
-            else if (!isClear(mf, row, col))
-                cout << nAdjacent(mf, row, col) << "  ";
+            else if (!isClear(row, col))
+                cout << nAdjacent(row, col) << "  ";
             else
                 cout << "0  ";
         }
@@ -118,77 +132,83 @@ void Grid::prntClr() const{
 }
 
 /// Function returns how  many 'flag' elements surround a given square
-short nAdjacent(short row, short col, short FLAG) const {
+short Grid::nAdjacent(short row, short col, Flag FLAG) const {
     short nAd=0;              /// the number of adjacent mines
     
     /// not on first or last row or first or last column
     /// most of the searches take place in this area
-    if ( row > 0 && col > 0 && row < mf->rows-1 && col < mf->cols-1) {
+    if ( row > 0 && col > 0 && row < size-1 && col < size-1) {
         /// search the 3x3 grid surrounding a cell
         for (short i = row-1; i <= row+1; ++i) {
             for (short j = col-1; j <= col+1; ++j)
-                if (mf->data[i][j] == FLAG)
+                if (grid[i][j] == FLAG)
                     ++nAd;
         }
     }
     /// on the first row, not on first or last column
-    else if ( row == 0 && col > 0 && col < mf->cols - 1) {
+    else if ( row == 0 && col > 0 && col < size - 1) {
         for (short i = row; i <= row+1; ++i) {
             for (short j = col-1; j <= col+1; ++j)
-                if (mf->data[i][j] == MineField::MINE)
+                if (grid[i][j] == FLAG)
                     ++nAd;
         }
     }
     /// on the last row, not on first or last column
-    else if ( row == mf->rows-1 && col > 0 && col < mf->cols - 1) {
+    else if ( row == size-1 && col > 0 && col < size - 1) {
         for (short i = row-1; i <= row; ++i) {
             for (short j = col-1; j <= col+1; ++j)
-                if (mf->data[i][j] == MineField::MINE)
+                if (grid[i][j] == FLAG)
                     ++nAd;
         }
     }
     /// on the first column, not on first or last row
     /// search to the right
-    else if ( col == 0 && row > 0 && row < mf->rows - 1) {
+    else if ( col == 0 && row > 0 && row < size - 1) {
         for (short i = row-1; i <= row+1; ++i) {
             for (short j = col; j <= col+1; ++j)
-                if (mf->data[i][j] == MineField::MINE)
+                if (grid[i][j] == FLAG)
                     ++nAd;
         }
     }
     /// on the last column, not on first or last row
     /// search to the left
-    else if ( col == mf->cols-1 && row > 0 && row < mf->rows - 1) {
+    else if ( col == size-1 && row > 0 && row < size - 1) {
         for (short i = row-1; i <= row+1; ++i) {
             for (short j = col-1; j <= col; ++j)
-                if (mf->data[i][j] == MineField::MINE)
+                if (grid[i][j] == FLAG)
                     ++nAd;
         }
     }
     /// top left corner
     else if (row == 0 && col == 0) {
-        if (mf->data[row][col+1] == MineField::MINE) ++nAd;
-        if (mf->data[row+1][col] == MineField::MINE) ++nAd;
-        if (mf->data[row+1][col+1] == MineField::MINE) ++nAd;
+        if (grid[row][col+1] == FLAG) ++nAd;
+        if (grid[row+1][col] == FLAG) ++nAd;
+        if (grid[row+1][col+1] == FLAG) ++nAd;
     }
     /// top right corner
-    else if (row == 0 && col == mf->cols-1) {
-        if (mf->data[row][col-1] == MineField::MINE) ++nAd;
-        if (mf->data[row+1][col] == MineField::MINE) ++nAd;
-        if (mf->data[row+1][col-1] == MineField::MINE) ++nAd;
+    else if (row == 0 && col == size-1) {
+        if (grid[row][col-1] == FLAG) ++nAd;
+        if (grid[row+1][col] == FLAG) ++nAd;
+        if (grid[row+1][col-1] == FLAG) ++nAd;
     }
     /// bottom left corner
-    else if (row == mf->rows-1 && col == 0) {
-        if (mf->data[row-1][col] == MineField::MINE) ++nAd;
-        if (mf->data[row-1][col+1] == MineField::MINE) ++nAd;
-        if (mf->data[row][col+1] == MineField::MINE) ++nAd;
+    else if (row == size-1 && col == 0) {
+        if (grid[row-1][col] == FLAG) ++nAd;
+        if (grid[row-1][col+1] == FLAG) ++nAd;
+        if (grid[row][col+1] == FLAG) ++nAd;
     }
     /// bottom right corner
-    else if (row == mf->rows-1 && col == mf->cols-1) {
-        if (mf->data[row-1][col-1] == MineField::MINE) ++nAd;
-        if (mf->data[row-1][col] == MineField::MINE) ++nAd;
-        if (mf->data[row][col-1] == MineField::MINE) ++nAd;
+    else if (row == size-1 && col == size-1) {
+        if (grid[row-1][col-1] == FLAG) ++nAd;
+        if (grid[row-1][col] == FLAG) ++nAd;
+        if (grid[row][col-1] == FLAG) ++nAd;
     }
     /// return number of mines from appropriate if statement
     return nAd;
+}
+
+bool Grid::isClear(short row, short col) const{
+    if (nAdjacent(row, col))
+        return false;            /// there was at least one mine adjacent
+    return true;                 /// area was clear
 }
