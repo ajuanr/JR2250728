@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
     Grid *area = new Grid();
     area->init();
     area->setMines();
-    area->print();
+    area->prntObscr();
     
     delete area;
     return 0;

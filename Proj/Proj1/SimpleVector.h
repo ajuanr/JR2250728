@@ -45,6 +45,7 @@ public:
     
     // Overloaded [] operator declaration
     T &operator[](const int &);
+    T &operator[](const int &) const;
     
     // Pushes new element onto array
     void push_back(T);
@@ -66,7 +67,7 @@ private:
     int avail;        // points to one past last element pushed
     int arraySize;    // Total number of elements in the array
     void memError();  // Handles memory allocation errors
-    void subError();  // Handles subscripts out of range
+    void subError() const;  // Handles subscripts out of range
     
     void create(int); // create a SimpleVector
     void expand();    // double the size of the SimpleVector
@@ -220,7 +221,7 @@ void SimpleVector<T>::memError()
 //***********************************************************
 
 template <class T>
-void SimpleVector<T>::subError()
+void SimpleVector<T>::subError() const
 {
     cout << "ERROR: Subscript out of range.\n";
     exit(EXIT_FAILURE);
@@ -248,6 +249,14 @@ T SimpleVector<T>::getElementAt(int sub)
 
 template <class T>
 T &SimpleVector<T>::operator[](const int &sub)
+{
+    if (sub < 0 || sub >= arraySize)
+        subError();
+    return aPtr[sub];
+}
+
+template <class T>
+T &SimpleVector<T>::operator[](const int &sub) const
 {
     if (sub < 0 || sub >= arraySize)
         subError();

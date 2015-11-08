@@ -20,11 +20,19 @@ public:
     void init();
     void setMines(short=20);
     void print() const;
-    void prntObscr();
+    void prntObscr() const;
+    void prntClr() const;
 private:
+    // Various flags place on grid
+    enum Flag {EMPTY=10, MINE=87, CLEAR, LOSER};
+    
+    // data
     ss grid;
     short size; // grid will have area size x size
     
-    enum Flag {EMPTY=10, MINE=87, CLEAR, LOSER};
+    // utility functions
+    void nAdjacent(short, short, Flag);
+    void setFlags();
+    
 };
 #endif /* Grid_hpp */
