@@ -20,7 +20,7 @@ Grid::Grid(short size):size(size) {
     if (size < 2) {
         size = 10;
     }
-    init();
+    //init();
 }
 
 void Grid::init() {
@@ -56,8 +56,11 @@ void Grid::setMines() {
     srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
     /// 20 percent of grid is composed of mines
-    short mines = size*2/10;
+    cout << "Size is : " << size << endl;
+    short mines = size - (size*2/10);
+    cout << "Number of mines: " << mines << endl;
     (mines<1)?mines=1: mines=mines;
+    cout << "New Number of mines: " << mines << endl;
     
     /// keep looping through minefield until all mines are set
     typedef sv::iterator iv;
@@ -65,7 +68,7 @@ void Grid::setMines() {
     while (mines) {
         for ( is i = grid.begin(); i != grid.end(); ++i) {
             for (iv j = i->begin(); j != i->end(); ++j) {
-                /// place mines if result of rand()%15 == 0
+                /// place mines if result of rand()%10 == 0
                 if ((rand() % 100 + 1) % 100 == 0){
                     ///only place mines if mines are still available
                     /// and current is empty

@@ -15,6 +15,9 @@
 int main(int argc, const char * argv[]) {
     Grid *area = new Grid();
     area->init();
+    //area->create();
+    //area->setMines();
+    //area->prntObscr();
     std::cout << endl;
     area->prntClr();
     delete area;
