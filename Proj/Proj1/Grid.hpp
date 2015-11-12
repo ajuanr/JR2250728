@@ -35,6 +35,7 @@ private:
     short nAdjacent(short, short, Flag=MINE) const;
     void setFlags();
     bool isClear(short, short) const;
+    void showZeroes(short, short) const;
     
 };
 #endif /* Grid_hpp */
