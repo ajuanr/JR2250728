@@ -53,7 +53,7 @@ void Grid::print() const {
 }
 
 void Grid::setMines() {
-    srand(static_cast<unsigned int>(time(0)));
+    //srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
     /// 20 percent of grid is composed of mines
     cout << "Size is : " << size << endl;
@@ -214,4 +214,89 @@ bool Grid::isClear(short row, short col) const{
     if (nAdjacent(row, col))
         return false;            /// there was at least one mine adjacent
     return true;                 /// area was clear
+}
+
+/// Clear an area whose values are clear
+/// i.e 0 adjacent  mines
+void Grid::showZeros(short row, short col) {
+    /// check bounds
+    if ( row >=size  || row < 0 || col >= size || col < 0)
+        return;
+    if (isClear(row, col) && grid[row][col] != CLEAR){
+        grid[row][col] = CLEAR;
+        /// go up one row
+        showZeros(row+1, col);
+        /// go down one row
+        showZeros(row-1, col);
+        /// go right one col
+        showZeros(row, col+1);
+        /// go left one col
+        showZeros(row, col-1);
+    }
+    /// space was not clear or already shown
+    else
+        return;
+}
+
+/// Function find the perimeter of the cleared areas
+void Grid::setPerim() {
+    cout << "in set perimeter\n";
+    for (short row = 0; row != size; ++row ) {
+        /// avoid search at left and right edge of array
+        for (short col = 0; col != size; ++col) {
+            /// when you're not on the bounds of the array
+            if (row > 0 && row < size-1
+                && col > 0 &&  col <size-1)
+                if (grid[row][col] == CLEAR) {
+                    /// check that the previous number has mines adjacent
+                    if (grid[row][col-1] != CLEAR)
+                        grid[row][col-1] = nAdjacent(row, col-1);
+                    /// check if the next number has mines adjacent
+                    if (grid[row][col+1] != CLEAR)
+                        grid[row][col+1] = nAdjacent(row, col+1);
+                    if (grid[row-1][col] != CLEAR)
+                        grid[row-1][col] = nAdjacent(row-1, col);
+                    /// check if the next number has mines adjacent
+                    if (grid[row+1][col] != CLEAR)
+                        grid[row+1][col] = nAdjacent(row+1, col);
+                    /// check the adjacent corners
+                    if (grid[row+1][col-1] != CLEAR)
+                        grid[row-1][col-1] = nAdjacent(row-1, col-1);
+                    if (grid[row-1][col+1] != CLEAR)
+                        grid[row-1][col+1] = nAdjacent(row-1, col+1);
+                    if (grid[row+1][col-1] != CLEAR)
+                        grid[row+1][col-1] = nAdjacent(row+1, col-1);
+                    if (grid[row+1][col+1] != CLEAR)
+                        grid[row+1][col+1] = nAdjacent(row+1, col+1);
+                }
+        }
+    }
+}
+
+/// test what beneath a space
+/// return false is space is a bomb, causing player to lose
+bool Grid::test(short row, short col) {
+    cout << "in test\n";
+    /// check if user selected a losing square
+    if (grid[row][col] == MINE) {
+        grid[row][col] = LOSER;
+        return false;
+    }
+    
+    /// Square is a zero, clear the surrounding area if necessary
+    else if (isClear(row, col) ){
+        
+        showZeros(row, col); /// show cleared area
+        setPerim();
+        prntObscr();
+        return true;
+    }
+    /// Square had adjacent mine
+    /// reveal the number to the user
+    else {
+        cout <<"changin value\n";
+        grid[row][col] = nAdjacent(row, col);
+        prntObscr();
+        return true;
+    }
 }

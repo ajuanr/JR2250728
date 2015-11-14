@@ -17,7 +17,9 @@ int main(int argc, const char * argv[]) {
     area->init();
     //area->create();
     //area->setMines();
-    //area->prntObscr();
+    cout << "is: " << area->test(1,5) << endl;
+    //area->print();
+    area->prntObscr();
     std::cout << endl;
     area->prntClr();
     delete area;

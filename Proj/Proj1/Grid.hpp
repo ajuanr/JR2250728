@@ -23,19 +23,28 @@ public:
     void print() const;
     void prntObscr() const;
     void prntClr() const;
+    bool test(short, short);
+    
 private:
-    // Various flags place on grid
+    /*********************************************
+     *********** Enumerations ****************
+     ********************************************/
     enum Flag {EMPTY=10, MINE=87, CLEAR, LOSER};
     
-    // data
+    /*********************************************
+     *********** Member Variables ****************
+     ********************************************/
     ss grid;
     short size; // grid will have area size x size
     
-    // utility functions
+    /*********************************************
+     *********** Utility Functions ****************
+     ********************************************/
     short nAdjacent(short, short, Flag=MINE) const;
     void setFlags();
     bool isClear(short, short) const;
-    void showZeroes(short, short) const;
+    void showZeros(short, short);
+    void setPerim();
     
 };
 #endif /* Grid_hpp */
