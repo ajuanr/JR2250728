@@ -16,6 +16,16 @@ Minesweeper::Minesweeper(std::string name): name(name) {
 }
 
 void Minesweeper::init() const {
-    cout << "Welcome " << name << "this to play some Minesweeper\n";
+    cout << "Welcome " << name << ", time to play some Minesweeper!\n";
     mField->init();
+}
+
+bool Minesweeper::cont() const{
+    cout << "Choose a space to test.\n";
+    int row, col;
+    cout << "Enter the row: ";
+    cin >> row;
+    cout << "Enter the column: ";
+    cin >> col;
+    return mField->test(row, col);
 }

@@ -55,9 +55,11 @@ void Grid::print() const {
 void Grid::setMines() {
     //srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
-    /// 20 percent of grid is composed of mines
+    /// 30 percent of grid is composed of mines
     cout << "Size is : " << size << endl;
-    short mines = size - (size*2/10);
+    int area = size * size;
+    
+    short mines = area - (area*6/10);
     cout << "Number of mines: " << mines << endl;
     (mines<1)?mines=1: mines=mines;
     cout << "New Number of mines: " << mines << endl;
@@ -280,6 +282,7 @@ bool Grid::test(short row, short col) {
     /// check if user selected a losing square
     if (grid[row][col] == MINE) {
         grid[row][col] = LOSER;
+        prntClr();
         return false;
     }
     

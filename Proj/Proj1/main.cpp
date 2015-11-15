@@ -33,6 +33,7 @@ int main(int argc, const char * argv[]) {
     
     Minesweeper *player = new Minesweeper(name);
     player->init();
+    while(player->cont()){};
     
     return 0;
 }

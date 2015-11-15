@@ -21,9 +21,11 @@ public:
     Minesweeper(std::string);
     ~Minesweeper() {delete mField;}
     
+    
     void init() const;
+    bool cont() const;
 private:
-    std::string name; /// player name;
+    std::string name; /// player name
     Grid *mField; /// the minefield
 };
 
