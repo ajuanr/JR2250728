@@ -17,10 +17,14 @@
 
 class Minesweeper {
 public:
+    /// constructors/ destructors
+    Minesweeper(std::string);
+    ~Minesweeper() {delete mField;}
     
+    void init() const;
 private:
     std::string name; /// player name;
-    Grid mField; /// the minefield
+    Grid *mField; /// the minefield
 };
 
 

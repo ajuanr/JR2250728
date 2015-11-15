@@ -7,3 +7,15 @@
 //
 
 #include "Minesweeper.hpp"
+#include <iostream>
+
+using namespace std;
+
+Minesweeper::Minesweeper(std::string name): name(name) {
+    mField = new Grid();
+}
+
+void Minesweeper::init() const {
+    cout << "Welcome " << name << "this to play some Minesweeper\n";
+    mField->init();
+}
