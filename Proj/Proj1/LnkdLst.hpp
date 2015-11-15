@@ -18,7 +18,7 @@ class LnkdLst {
 public:
     LnkdLst();
     LnkdLst(T);
-    LnkdLst(LnkdLst&); // copy constructor
+    LnkdLst(const LnkdLst&); // copy constructor
     void append(T);
     void prepend(T);
     string toString();
@@ -70,8 +70,10 @@ LnkdLst<T>::LnkdLst(T n) {
     size = 1;
 }
 
+
+/// The copy constructor
 template<class T>
-LnkdLst<T>::LnkdLst(LnkdLst& lst) {
+LnkdLst<T>::LnkdLst(const LnkdLst& lst) {
     Node *headLnk=new Node;
     headLnk->data=lst.get(0);
     headLnk->next=NULL;
@@ -141,10 +143,6 @@ LnkdLst<T>::~LnkdLst() {
         size = 0;
     }
 }
-
-//*****************************************************
-//** These functions added as part of the homework ****
-//*****************************************************
 
 //*****************************************************
 //** Default constructor ****

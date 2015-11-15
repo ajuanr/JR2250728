@@ -6,20 +6,37 @@
 //  Copyright © 2015 Juan Ruiz. All rights reserved.
 //
 
-// system libraries
+/// system libraries
 #include <iostream>
+#include <map>
+#include <string>
 
-// user libraries
-#include "Grid.hpp"
+/// user libraries
+#include "LnkdLst.hpp"
 #include "Minesweeper.hpp"
 
 using namespace std;
+
+
+int playOnce();
+void prntHist(map<string, LnkdLst<int> >&); // print previous game histories
 
 int main(int argc, const char * argv[]) {
     cout << "Enter your name: ";
     string name;
     cin >> name;
     
+    int score = playOnce();
+    
+    map<string, LnkdLst<int> > pData; /// holds players data
+    pData[name].append(score);
+    
+    prntHist(pData);
+    
+    return 0;
+}
+
+int playOnce() {
     Minesweeper *player = new Minesweeper();
     player->init();
     bool cont = true;
@@ -38,17 +55,18 @@ int main(int argc, const char * argv[]) {
     }
     else cout << "You lose\n";
     
-    return 0;
+    return 77;
 }
 
-//    Grid *area = new Grid();
-//    area->init();
-//    //area->create();
-//    //area->setMines();
-//    cout << "is: " << area->test(1,5) << endl;
-//    //area->print();
-//    cout << area->hasWon() << endl;
-//    area->prntObscr();
-//    std::cout << endl;
-//    area->prntClr();
-//    delete area;
+void prntHist(map<string, LnkdLst<int> >& m) {
+    for(map<string, LnkdLst<int> >::iterator it = m.begin();
+        it != m.end(); ++it) {
+        /// Print the name
+        cout << it->first << " ";
+        (it->second).print();
+        /// Print the associated scores
+        for (int i = 0; i != (it->second).getSize(); ++i) {
+            
+        }
+    }
+}
