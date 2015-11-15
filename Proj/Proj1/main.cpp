@@ -19,7 +19,7 @@ using namespace std;
 
 
 int playOnce();
-void prntHist(map<string, LnkdLst<int> >&); // print previous game histories
+void prntHist(map<string, LnkdLst<int> >&, ostream&); // print previous game histories
 
 int main(int argc, const char * argv[]) {
     cout << "Enter your name: ";
@@ -31,7 +31,7 @@ int main(int argc, const char * argv[]) {
     map<string, LnkdLst<int> > pData; /// holds players data
     pData[name].append(score);
     
-    prntHist(pData);
+    prntHist(pData, cout);
     
     return 0;
 }
@@ -58,15 +58,17 @@ int playOnce() {
     return 77;
 }
 
-void prntHist(map<string, LnkdLst<int> >& m) {
+void prntHist(map<string, LnkdLst<int> >& m, ostream& out) {
     for(map<string, LnkdLst<int> >::iterator it = m.begin();
         it != m.end(); ++it) {
         /// Print the name
-        cout << it->first << " ";
-        (it->second).print();
+        out << it->first << " ";
+        //(it->second).print();
         /// Print the associated scores
-        for (int i = 0; i != (it->second).getSize(); ++i) {
-            
+        out << it->second.get(0);
+        for (int i = 1; i != (it->second).getSize(); ++i) {
+            out << " " << it->second.get(i);
         }
     }
+    cout << endl;
 }
