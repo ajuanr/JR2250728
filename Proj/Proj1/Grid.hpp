@@ -24,12 +24,13 @@ public:
     void prntObscr() const;
     void prntClr() const;
     bool test(short, short);
+    bool hasWon() const;
     
 private:
     /*********************************************
      *********** Enumerations ****************
      ********************************************/
-    enum Flag {EMPTY=10, MINE=87, CLEAR, LOSER};
+    enum Flag {EMPTY=10, MINE, CLEAR, LOSER};
     
     /*********************************************
      *********** Member Variables ****************

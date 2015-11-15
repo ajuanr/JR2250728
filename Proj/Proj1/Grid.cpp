@@ -300,3 +300,14 @@ bool Grid::test(short row, short col) {
         return true;
     }
 }
+
+/// Function checks whether the player has won
+bool Grid::hasWon() const{
+    for (short i = 0; i != size; ++i)
+        for (short j = 0; j != size; ++j)
+            /// if there are empty spaces player has not won
+            if (grid[i][j] == EMPTY)
+                return false;
+    /// there were no empty spaces left. Player has won
+    return true;
+}

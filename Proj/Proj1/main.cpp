@@ -19,6 +19,7 @@ int main(int argc, const char * argv[]) {
     //area->setMines();
     cout << "is: " << area->test(1,5) << endl;
     //area->print();
+    cout << area->hasWon() << endl;
     area->prntObscr();
     std::cout << endl;
     area->prntClr();
