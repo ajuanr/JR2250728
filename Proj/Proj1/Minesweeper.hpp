@@ -10,7 +10,6 @@
 #define Minesweeper_hpp
 
 /// System libraries
-#include <string>
 
 /// User libraries
 #include "Grid.hpp"
@@ -18,17 +17,16 @@
 class Minesweeper {
 public:
     /// constructors/ destructors
-    Minesweeper(std::string);
+    Minesweeper();
     ~Minesweeper() {delete mField;}
     
     
     void init() const;
     bool cont() const;
+    
+    bool victory() { return mField->hasWon();}
 private:
-    std::string name; /// player name
     Grid *mField; /// the minefield
 };
-
-
 
 #endif /* Minesweeper_hpp */

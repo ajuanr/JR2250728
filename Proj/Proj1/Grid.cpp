@@ -56,14 +56,12 @@ void Grid::setMines() {
     //srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
     /// 30 percent of grid is composed of mines
-    cout << "Size is : " << size << endl;
     int area = size * size;
-    
-    short mines = area - (area*6/10);
-    cout << "Number of mines: " << mines << endl;
+    short mines = area - (area*7/10);
+
     (mines<1)?mines=1: mines=mines;
-    cout << "New Number of mines: " << mines << endl;
-    
+
+    cout << "Number of mines: " << mines << endl;
     /// keep looping through minefield until all mines are set
     typedef sv::iterator iv;
     typedef ss::iterator is;
@@ -278,7 +276,6 @@ void Grid::setPerim() {
 /// test what beneath a space
 /// return false is space is a bomb, causing player to lose
 bool Grid::test(short row, short col) {
-    cout << "in test\n";
     /// check if user selected a losing square
     if (grid[row][col] == MINE) {
         grid[row][col] = LOSER;
@@ -297,7 +294,6 @@ bool Grid::test(short row, short col) {
     /// Square had adjacent mine
     /// reveal the number to the user
     else {
-        cout <<"changin value\n";
         grid[row][col] = nAdjacent(row, col);
         prntObscr();
         return true;

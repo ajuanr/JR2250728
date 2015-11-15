@@ -16,6 +16,31 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    cout << "Enter your name: ";
+    string name;
+    cin >> name;
+    
+    Minesweeper *player = new Minesweeper();
+    player->init();
+    bool cont = true;
+    while(cont){
+        /// if this result if false, player has lost
+        if(!player->cont()) {
+            cont = false;
+        }
+        /// if this result is true, plyaer has won
+        if (player->victory()) {
+            cont=false;
+        }
+    }
+    if (player->victory()) {
+        cout << "You win!!!\n";
+    }
+    else cout << "You lose\n";
+    
+    return 0;
+}
+
 //    Grid *area = new Grid();
 //    area->init();
 //    //area->create();
@@ -27,13 +52,3 @@ int main(int argc, const char * argv[]) {
 //    std::cout << endl;
 //    area->prntClr();
 //    delete area;
-    cout << "Enter your name: ";
-    string name;
-    cin >> name;
-    
-    Minesweeper *player = new Minesweeper(name);
-    player->init();
-    while(player->cont()){};
-    
-    return 0;
-}
