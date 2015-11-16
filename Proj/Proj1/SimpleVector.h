@@ -134,7 +134,7 @@ void SimpleVector<T>::create(int s) {
     
     // Initialize the array.
     for (int count = 0; count < arraySize; count++)
-        *(aPtr + count) = 0;
+        *(aPtr + count) = T();
 }
 
 //*************************************************
