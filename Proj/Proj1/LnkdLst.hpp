@@ -144,9 +144,9 @@ LnkdLst<T>::~LnkdLst() {
     }
 }
 
-//*****************************************************
-//** Default constructor ****
-//*****************************************************
+///*****************************************************
+///** Default constructor ****
+///*****************************************************
 template<class T>
 LnkdLst<T>::LnkdLst() {
     head=NULL;
@@ -174,10 +174,10 @@ void LnkdLst<T>::dltHead() {
 }
 
 
-//**************************************************************
-// ** function dltCurrent deletes the node passed in ***********
-// ** Check the position of the node to ensure proper deletion *
-//**************************************************************
+///**************************************************************
+/// ** function dltCurrent deletes the node passed in ***********
+/// ** Check the position of the node to ensure proper deletion *
+///**************************************************************
 template<class T>
 void LnkdLst<T>::dltCurrent(Node *current) {
     // current is the head
@@ -271,6 +271,9 @@ T& LnkdLst<T>::get(int n) {
     return head->data;
 }
 
+///************************************************************
+///* function inseertBefore inserts a val before the value at *
+///* the desired index ***************************************
 template<class T>
 void LnkdLst<T>::insertBefore(int index, T val) {
     if (head) {
@@ -380,7 +383,7 @@ void LnkdLst<T>::sort() {
 
 template<class T>
 LnkdLst<T>& LnkdLst<T>::operator=(LnkdLst &rhs) {
-    // guard against self-assignment
+    /// guard against self-assignment
     if (&rhs != this) {
         Node *headLnk=new Node;
         headLnk->data=rhs.get(0);

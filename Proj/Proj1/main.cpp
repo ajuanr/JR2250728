@@ -31,27 +31,28 @@ int main(int argc, const char * argv[]) {
     string name;
     cin >> name;
     
+    ///**** testing
+    ifstream inFile("PlayerScores.txt");
+    map<string, LnkdLst<int> > lData; /// holds players data
+    loadData(inFile, lData);
+    inFile.close();
+    cout << "Printing loaded data\n";
+    printData(lData);
+    
     int score = playOnce();
     
-    map<string, LnkdLst<int> > pData; /// holds players data
-    pData[name].append(score);
-    
-    printData(pData);
+    lData[name].append(score);
+    cout << "Re printing data\n";
+    printData(lData);
     
     ofstream outFile("PlayerScores.txt");
 
     if (outFile.is_open()) {
-    printData(pData, outFile);
+    printData(lData, outFile);
     outFile.close();
     }
     else
         cout << "File failed to open";
-    
-    ////**** testing
-    ifstream inFile("PlayerScores.txt");
-    map<string, LnkdLst<int> > lData; /// holds players data
-    loadData(inFile, lData);
-    //printData(lData);
     
     return 0;
 }
@@ -92,12 +93,12 @@ void printData(map<string, LnkdLst<int> >& m, ostream& out) {
         it != m.end(); ++it) {
         /// Print the name
         out << it->first << " ";
-        //(it->second).print();
         /// Print the associated scores
         out << it->second.get(0);
         for (int i = 1; i != it->second.getSize(); ++i) {
             out << " " << it->second.get(i);
         }
+        cout << endl;
     }
     cout << endl;
 }
@@ -109,19 +110,21 @@ void loadData(ifstream& inFile, map<string, LnkdLst<int> >& m) {
         cout << "Error reading file\n";
         return;
     }
-    SimpleVector<string> temp;
+    
     while (getline(inFile, line)) {
-        temp = split(line);
+        SimpleVector<string> temp(split(line));
         /// load the name into the map
         m[temp[0]];
         for(int i = 1; i != temp.size(); ++i) {
             istringstream is(temp[i]);
             int num;
             is>>num;
-            m[temp[0]].append(5);
+            m[temp[0]].append(num);
         }
     }
 }
+
+
 
 /// Function splits seperates each word sepereated by a space
 /// and returns the individual componenets in a vector
