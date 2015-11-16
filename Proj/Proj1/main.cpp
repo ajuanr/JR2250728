@@ -54,6 +54,8 @@ int main(int argc, const char * argv[]) {
     else
         cout << "File failed to open";
     
+    printData(lData);
+    
     return 0;
 }
 
