@@ -11,6 +11,7 @@
 #include <iostream>
 #include <map>
 #include <string>
+#include <sstream>
 
 /// user libraries
 #include "LnkdLst.hpp"
@@ -50,7 +51,7 @@ int main(int argc, const char * argv[]) {
     ifstream inFile("PlayerScores.txt");
     map<string, LnkdLst<int> > lData; /// holds players data
     loadData(inFile, lData);
-    printData(lData);
+    //printData(lData);
     
     return 0;
 }
@@ -114,9 +115,10 @@ void loadData(ifstream& inFile, map<string, LnkdLst<int> >& m) {
         /// load the name into the map
         m[temp[0]];
         for(int i = 1; i != temp.size(); ++i) {
-            cout << temp[0] << endl;
-            //int num = atoi(temp[i]);
-            //cout << num << endl;//m[temp[0]].append(stoi(temp[i]));
+            istringstream is(temp[i]);
+            int num;
+            is>>num;
+            m[temp[0]].append(5);
         }
     }
 }
