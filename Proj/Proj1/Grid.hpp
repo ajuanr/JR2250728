@@ -17,6 +17,7 @@ public:
     typedef SimpleVector<short> sv;
     
     Grid(short size=10);
+    int getSize() const {return size;}
     void init();
     void create();
     void setMines();
