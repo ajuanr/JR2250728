@@ -100,7 +100,7 @@ void printData(map<string, LnkdLst<int> >& m, ostream& out) {
         for (int i = 1; i != it->second.getSize(); ++i) {
             out << " " << it->second.get(i);
         }
-        cout << endl;
+        out << endl;
     }
     cout << endl;
 }
