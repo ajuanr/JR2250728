@@ -40,11 +40,9 @@ int main(int argc, const char * argv[]) {
     printData(lData);
     
     int score = playOnce();
-    
     lData[name].append(score);
-    cout << "Re printing data\n";
-    printData(lData);
     
+    /// after games are played, save scores to the file
     ofstream outFile("PlayerScores.txt");
 
     if (outFile.is_open()) {

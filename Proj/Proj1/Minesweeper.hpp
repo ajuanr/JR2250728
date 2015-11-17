@@ -10,6 +10,7 @@
 #define Minesweeper_hpp
 
 /// System libraries
+#include <string>
 
 /// User libraries
 #include "Grid.hpp"
@@ -27,6 +28,9 @@ public:
     bool victory() { return mField->hasWon();}
 private:
     Grid *mField; /// the minefield
+    
+    /// Utility Functions
+    short testInput(string) const;
 };
 
 #endif /* Minesweeper_hpp */
