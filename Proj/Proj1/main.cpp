@@ -20,10 +20,13 @@
 
 using namespace std;
 
+/// Typedefs
+typedef map<string, LnkdLst<int> > svMap;
 
+/// Functions
 int playOnce();
-void printData(map<string, LnkdLst<int> >&, ostream& =cout); // print previous game histories
-void loadData(ifstream&, map<string, LnkdLst<int> >&);
+void printData(svMap&, ostream& =cout); // print previous game histories
+void loadData(ifstream&, svMap&);
 SimpleVector<string> split(const string&);
 
 int main(int argc, const char * argv[]) {
@@ -33,11 +36,11 @@ int main(int argc, const char * argv[]) {
     
     ///**** testing
     ifstream inFile("PlayerScores.txt");
-    map<string, LnkdLst<int> > lData; /// holds players data
+    svMap lData; /// holds players data
     loadData(inFile, lData);
     inFile.close();
-    cout << "Printing loaded data\n";
-    printData(lData);
+//    cout << "Printing loaded data\n";
+//    printData(lData);
     
     int score = playOnce();
     lData[name].append(score);
@@ -78,18 +81,24 @@ int playOnce() {
         }
     }
     int end = time(0);
-    cout << "Total time is: " << end - beg << endl;
+    score -= (end-beg)/10;
+    
     if (player->victory()) {
         cout << "You win!!!\n";
     }
     else cout << "You lose\n";
     
+    cout << "Total time is: " << end - beg << endl;
+    
+    /// don't allow score to go negative
+    if(score<0) score=0;
+    cout << "Your score is: " << score << endl;
     return score;
 }
 
 /// Function printData prints the data in the map to the screeen or a file
-void printData(map<string, LnkdLst<int> >& m, ostream& out) {
-    for(map<string, LnkdLst<int> >::iterator it = m.begin();
+void printData(svMap& m, ostream& out) {
+    for(svMap::iterator it = m.begin();
         it != m.end(); ++it) {
         /// Print the name
         out << it->first << " ";
@@ -104,7 +113,7 @@ void printData(map<string, LnkdLst<int> >& m, ostream& out) {
 }
 
 /// This funtion read in previous data from a file
-void loadData(ifstream& inFile, map<string, LnkdLst<int> >& m) {
+void loadData(ifstream& inFile, svMap& m) {
     string line;
     if (!inFile.is_open()) {
         cout << "Error reading file\n";
@@ -124,14 +133,13 @@ void loadData(ifstream& inFile, map<string, LnkdLst<int> >& m) {
     }
 }
 
-
-
 /// Function splits seperates each word sepereated by a space
 /// and returns the individual componenets in a vector
 SimpleVector<string> split(const string& s) {
     SimpleVector<string> out;
     
     typedef string::const_iterator cit;
+    
     cit  begin= s.begin(); /// This marks the beginning of the line/word
     cit end = s.begin();
     for(cit it = s.begin(); it != s.end(); ++it) {
@@ -146,9 +154,7 @@ SimpleVector<string> split(const string& s) {
     }
     /// acount for last word because there are no spaces if string ends
     end = s.end();
-//    if(!isspace(*end)) {
-        out.push_back(string(begin, end)); /// create a new string and push it back
-//    cout << "Begin is: " << *begin << endl << "End is: " << *end<< endl;
+    out.push_back(string(begin, end)); /// create a new string and push it back
     
     return out;
 }

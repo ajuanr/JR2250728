@@ -24,6 +24,7 @@ public:
     string toString();
     virtual ~LnkdLst();
 
+    void destroy();
     void dltLast();
     void dltHead();
     void remove(T);
@@ -52,9 +53,9 @@ private:
     Node *worker;
     int size;
     
-    //******************************
-    //***** Utility functions *******
-    ////////////////////////////////
+    ///******************************
+    ///***** Utility functions *******
+    ///******************************
     void dltCurrent(Node *);
     void dltMid(Node *);
 };
@@ -90,6 +91,8 @@ LnkdLst<T>::LnkdLst(const LnkdLst& lst) {
         ++size;
     }
 }
+
+/// function append adds value n to the end of the linked list
 template<class T>
 void LnkdLst<T>::append(T n){
     Node *prev;
@@ -112,6 +115,7 @@ void LnkdLst<T>::append(T n){
     }
 }
 
+/// function to string converts the linked list into a string
 template<class T>
 string LnkdLst<T>::toString(){
     string build="";
@@ -131,8 +135,15 @@ string LnkdLst<T>::toString(){
     return build;
 }
 
+/// The destructor
 template<class T>
 LnkdLst<T>::~LnkdLst() {
+    destroy();
+}
+
+/// Function destroy cleans up any unsued memory
+template<class T>
+void LnkdLst<T>::destroy() {
     if(head){
         worker = head;
         do{
@@ -153,6 +164,10 @@ LnkdLst<T>::LnkdLst() {
     size=0;
     
 }
+
+///**********************************************************
+/// function dltHead removes the head from the linked list
+///**********************************************************
 template<class T>
 void LnkdLst<T>::dltHead() {
     // head is not the only node
@@ -188,7 +203,9 @@ void LnkdLst<T>::dltCurrent(Node *current) {
         --size;
     }
 }
-
+///***********************************************************
+///* function dltLast removes the last element from the list *
+///***********************************************************
 template<class T>
 void LnkdLst<T>::dltLast() {
     if (head) {
@@ -253,9 +270,9 @@ void LnkdLst<T>::remove(T n) {
     }
 }
 
-//**********************************************************
-// ** function get, returns the data in the node passed in *
-//**********************************************************
+///**********************************************************
+/// ** function get, returns the data in the node passed in *
+///**********************************************************
 template<class T>
 T& LnkdLst<T>::get(int n) {
     if (n>=0 && n<size) {
@@ -298,6 +315,9 @@ void LnkdLst<T>::insertBefore(int index, T val) {
     }
 }
 
+///********************************************************************
+///* function insertAfter inserts the value after the specified index *
+///********************************************************************
 template<class T>
 void LnkdLst<T>::insertAfter(int index, T val) {
     if (head) {
@@ -309,10 +329,10 @@ void LnkdLst<T>::insertAfter(int index, T val) {
     }
 }
 
-//**********************************************************
-// ** function extract, returns the data at index **********
-// ** and deletes the node *********************************
-//**********************************************************
+///**********************************************************
+/// ** function extract, returns the data at index **********
+/// ** and deletes the node *********************************
+///**********************************************************
 template<class T>
 T LnkdLst<T>::extract(int index) {
     if (head) {
@@ -330,6 +350,9 @@ T LnkdLst<T>::extract(int index) {
 
 }
 
+///****************************************************
+///* function prepend inserts a value before the head *
+///****************************************************
 template<class T>
 void LnkdLst<T>::prepend(T val) {
     if (head) {
@@ -381,10 +404,16 @@ void LnkdLst<T>::sort() {
     }
 }
 
+
+/// Assignment operator
 template<class T>
 LnkdLst<T>& LnkdLst<T>::operator=(LnkdLst &rhs) {
     /// guard against self-assignment
     if (&rhs != this) {
+        /// clear up old data
+        destroy();
+        
+        /// allocate new data
         Node *headLnk=new Node;
         headLnk->data=rhs.get(0);
         headLnk->next=NULL;

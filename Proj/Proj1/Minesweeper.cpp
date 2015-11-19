@@ -25,7 +25,6 @@ bool Minesweeper::cont() const{
     short row=3, col;
     row=testInput("row");
     col = testInput("column");
-    cout << "row: " << row << " column: " << col << endl;
 
     return mField->test(row, col);
 }
@@ -34,7 +33,7 @@ bool Minesweeper::cont() const{
 /// that the input is valid. Repeats until valid input is entered
 /// or counter reaches 10 attemps
 short Minesweeper::testInput(string s) const{
-    string prompt = "Enter the " + s + "\n";
+    string prompt = "Enter the " + s + ": ";
     cout << prompt;
     short n;
     cin >> n;
