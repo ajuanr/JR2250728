@@ -25,6 +25,7 @@ using namespace std;
 typedef map<string, LnkdLst<int> > svMap;
 
 /// Functions
+void analyzeMoves(Stack<int>*);
 int playOnce();
 void printData(svMap&, ostream& =cout); // print previous game histories
 void loadData(ifstream&, svMap&);
@@ -68,7 +69,7 @@ int playOnce() {
     int score =0;
     int start = time(0);
     int end = time(0);
-    Stack<int> *moveTime = new Stack<int>();
+    Stack<int> *moveTime = new Stack<int>(0);
     
     while(cont){
         int beg = time(0);
@@ -85,22 +86,17 @@ int playOnce() {
         end = time(0);
         moveTime->push(end-beg);
     }
-    
-    int n;
-    while (n=moveTime->pop()) {
-        cout << "Move lasted: " << n << " seconds" << endl;
-    }
-    score -= (end-start)/10;
-    
-    
+
     if (player->victory()) {
         cout << "You win!!!\n";
     }
     else cout << "You lose\n";
     
-    cout << "Total time is: " << (end - start)/60 << " minutes "
-        << (end-start)%60 << " seconds\n";
+    analyzeMoves(moveTime);
+    score -= (end-start)/10;
     
+    delete moveTime;
+    delete player;
     /// don't allow score to go negative
     if(score<0) score=0;
     cout << "Your score is: " << score << endl;
@@ -168,4 +164,21 @@ SimpleVector<string> split(const string& s) {
     out.push_back(string(begin, end)); /// create a new string and push it back
     
     return out;
+}
+
+void analyzeMoves(Stack<int>* s) {
+    int total = 0;
+    int n;
+    int count=0;
+    
+    while(n=s->pop()) {
+        ++count;
+        total+=n;
+        cout << "Move took: " << n << " seconds" << endl;
+    }
+    cout << "Total time is: " << (total)/60 << " minutes "
+    << total%60 << " seconds\n";
+    
+    cout << "Average move took " << total/static_cast<float>(count)
+    << " seconds\n";
 }

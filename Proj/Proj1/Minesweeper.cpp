@@ -22,7 +22,7 @@ void Minesweeper::init() const {
 
 bool Minesweeper::cont() const{
     cout << "Choose a space to test.\n";
-    short row=3, col;
+    short row, col;
     row=testInput("row");
     col = testInput("column");
 
