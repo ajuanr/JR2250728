@@ -16,6 +16,7 @@
 /// user libraries
 #include "LnkdLst.hpp"
 #include "Minesweeper.hpp"
+#include "Stack.h"
 #include "SimpleVector.h"
 
 using namespace std;
@@ -34,13 +35,10 @@ int main(int argc, const char * argv[]) {
     string name;
     cin >> name;
     
-    ///**** testing
     ifstream inFile("PlayerScores.txt");
     svMap lData; /// holds players data
     loadData(inFile, lData);
     inFile.close();
-//    cout << "Printing loaded data\n";
-//    printData(lData);
     
     int score = playOnce();
     lData[name].append(score);
@@ -68,8 +66,12 @@ int playOnce() {
     
     bool cont = true;
     int score =0;
-    int beg = time(0);
+    int start = time(0);
+    int end = time(0);
+    Stack<int> *moveTime = new Stack<int>();
+    
     while(cont){
+        int beg = time(0);
         /// if this result if false, player has lost
         if(!player->cont()) {
             cont = false;
@@ -80,16 +82,24 @@ int playOnce() {
         if (player->victory()) {
             cont=false;
         }
+        end = time(0);
+        moveTime->push(end-beg);
     }
-    int end = time(0);
-    score -= (end-beg)/10;
+    
+    int n;
+    while (n=moveTime->pop()) {
+        cout << "Move lasted: " << n << " seconds" << endl;
+    }
+    score -= (end-start)/10;
+    
     
     if (player->victory()) {
         cout << "You win!!!\n";
     }
     else cout << "You lose\n";
     
-    cout << "Total time is: " << end - beg << endl;
+    cout << "Total time is: " << (end - start)/60 << " minutes "
+        << (end-start)%60 << " seconds\n";
     
     /// don't allow score to go negative
     if(score<0) score=0;
@@ -113,7 +123,7 @@ void printData(svMap& m, ostream& out) {
     cout << endl;
 }
 
-/// This funtion read in previous data from a file
+/// This funtion reads in previous data from a file
 void loadData(ifstream& inFile, svMap& m) {
     string line;
     if (!inFile.is_open()) {

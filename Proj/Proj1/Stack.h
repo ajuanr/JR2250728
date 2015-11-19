@@ -17,6 +17,7 @@ using namespace std;
 template<class T>
 class Stack {
 public:
+    Stack(){};
     Stack(T);
     void push(T);
     T pop();
@@ -34,6 +35,7 @@ private:
     T dltHead();
 };
 
+/// Constructor with T value
 template<class T>
 Stack<T>::Stack(T n) {
     Node *clink=new Node;
