@@ -65,6 +65,7 @@ int main(int argc, const char * argv[]) {
 int playOnce() {
     Minesweeper *player = new Minesweeper();
     player->init();
+    
     bool cont = true;
     int score =0;
     int beg = time(0);
