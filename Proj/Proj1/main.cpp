@@ -58,10 +58,16 @@ int main(int argc, const char * argv[]) {
     else
         cout << "File failed to open";
     
+    cout << "Woud you like to see player scores? 'y' for yes: ";
+    char q;
+    cin >> q;
+    if (q=='y') {
+    cout << "Printing player scores: ";
     printData(lData);
-    
+
     set<int> scores = highScores(lData);
     printScores(scores);
+    }
     
     return 0;
 }
@@ -119,7 +125,7 @@ void printData(svMap& m, ostream& out) {
         out << it->first << " ";
         /// Print the associated scores
         out << it->second.get(0);
-        for (int i = 0; i != it->second.getSize(); ++i) {
+        for (int i = 1; i != it->second.getSize(); ++i) {
             out << " " << it->second.get(i);
         }
         out << endl;
@@ -131,7 +137,7 @@ void printData(svMap& m, ostream& out) {
 void loadData(ifstream& inFile, svMap& m) {
     string line;
     if (!inFile.is_open()) {
-        cout << "Error reading file\n";
+        cout << "Scores file not found\n";
         return;
     }
     
@@ -205,16 +211,14 @@ set<int> highScores(svMap &m) {
 }
 
 void printScores(const set<int>& s) {
-    cout << "Printing scores unique\n";
-    Stack<int> *temp = new Stack<int>();
+    cout << "Printing unique scores\n";
+    Stack<int> *temp = new Stack<int>(0);
     for (set<int>::const_iterator cit = s.begin(); cit != s.end(); ++cit){
         temp->push(*cit);
         cout << *cit << " ";
     }
     cout << endl;
     int score;
-    cout << temp->toString() << endl;
-    cout << temp->pop() << endl;
     while(score=temp->pop()) {
         cout << score << " ";
     }
