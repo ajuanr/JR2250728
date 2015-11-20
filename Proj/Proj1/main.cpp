@@ -19,6 +19,7 @@
 #include "Minesweeper.hpp"
 #include "Stack.h"
 #include "SimpleVector.h"
+#include "Queue.h"
 
 using namespace std;
 
@@ -26,13 +27,13 @@ using namespace std;
 typedef map<string, LnkdLst<int> > svMap;
 
 /// Functions
-void analyzeMoves(Stack<int>*);
+void analyzeMoves(Queue<int>*);
 int playOnce();
 void printData(svMap&, ostream& =cout); // print previous game histories
 void loadData(ifstream&, svMap&);
 SimpleVector<string> split(const string&);
 set<int> highScores(svMap &m);
-void printSet(const set<int>& s);
+void printScores(const set<int>& s);
 
 int main(int argc, const char * argv[]) {
     cout << "Enter your name: ";
@@ -60,7 +61,7 @@ int main(int argc, const char * argv[]) {
     printData(lData);
     
     set<int> scores = highScores(lData);
-    printSet(scores);
+    printScores(scores);
     
     return 0;
 }
@@ -75,7 +76,7 @@ int playOnce() {
     int score =0;
     int start =time(0);
     int end = time(0);
-    Stack<int> *moveTime = new Stack<int>();
+    Queue<int> *moveTime = new Queue<int>();
     
     while(cont){
         int beg = time(0);
@@ -173,7 +174,7 @@ SimpleVector<string> split(const string& s) {
     return out;
 }
 
-void analyzeMoves(Stack<int>* s) {
+void analyzeMoves(Queue<int>* s) {
     int total = 0;
     int n;
     int count=0;
@@ -203,9 +204,20 @@ set<int> highScores(svMap &m) {
     return out;
 }
 
-void printSet(const set<int>& s) {
+void printScores(const set<int>& s) {
+    cout << "Printing scores unique\n";
+    Stack<int> *temp = new Stack<int>();
     for (set<int>::const_iterator cit = s.begin(); cit != s.end(); ++cit){
+        temp->push(*cit);
         cout << *cit << " ";
     }
     cout << endl;
+    int score;
+    cout << temp->toString() << endl;
+    cout << temp->pop() << endl;
+    while(score=temp->pop()) {
+        cout << score << " ";
+    }
+    cout << endl;
+    
 }
