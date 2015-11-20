@@ -53,7 +53,7 @@ void Grid::print() const {
 }
 
 void Grid::setMines() {
-    //srand(static_cast<unsigned int>(time(0)));
+    srand(static_cast<unsigned int>(time(0)));
     /// holds how many mines will be used
     /// 30 percent of grid is composed of mines
     int area = size * size;
