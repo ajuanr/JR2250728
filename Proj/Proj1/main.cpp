@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <set>
 #include <string>
 #include <sstream>
 
@@ -30,6 +31,8 @@ int playOnce();
 void printData(svMap&, ostream& =cout); // print previous game histories
 void loadData(ifstream&, svMap&);
 SimpleVector<string> split(const string&);
+set<int> highScores(svMap &m);
+void printSet(const set<int>& s);
 
 int main(int argc, const char * argv[]) {
     cout << "Enter your name: ";
@@ -56,6 +59,9 @@ int main(int argc, const char * argv[]) {
     
     printData(lData);
     
+    set<int> scores = highScores(lData);
+    printSet(scores);
+    
     return 0;
 }
 
@@ -67,9 +73,9 @@ int playOnce() {
     
     bool cont = true;
     int score =0;
-    int start = time(0);
+    int start =time(0);
     int end = time(0);
-    Stack<int> *moveTime = new Stack<int>(0);
+    Stack<int> *moveTime = new Stack<int>();
     
     while(cont){
         int beg = time(0);
@@ -92,6 +98,7 @@ int playOnce() {
     }
     else cout << "You lose\n";
     
+    cout << "***Some game data***\n";
     analyzeMoves(moveTime);
     score -= (end-start)/10;
     
@@ -111,7 +118,7 @@ void printData(svMap& m, ostream& out) {
         out << it->first << " ";
         /// Print the associated scores
         out << it->second.get(0);
-        for (int i = 1; i != it->second.getSize(); ++i) {
+        for (int i = 0; i != it->second.getSize(); ++i) {
             out << " " << it->second.get(i);
         }
         out << endl;
@@ -181,4 +188,24 @@ void analyzeMoves(Stack<int>* s) {
     
     cout << "Average move took " << total/static_cast<float>(count)
     << " seconds\n";
+}
+
+set<int> highScores(svMap &m) {
+    set<int> out;
+    /// Go through each name
+    for(svMap::iterator it = m.begin(); it != m.end(); ++it) {
+        /// Go through each score
+        for(int i = 0; i != it->second.getSize(); ++i) {
+            /// add that score to the set
+            out.insert(it->second.get(i));
+        }
+    }
+    return out;
+}
+
+void printSet(const set<int>& s) {
+    for (set<int>::const_iterator cit = s.begin(); cit != s.end(); ++cit){
+        cout << *cit << " ";
+    }
+    cout << endl;
 }
