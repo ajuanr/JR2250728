@@ -27,7 +27,7 @@ void RS(string&,string&,int, int,int,int);
 void JS(string&,string&,int, int,int,int);
 void PJW(string&,string&,int, int,int,int);
 void ELF(string&,string&,int, int,int,int);
-void BKD(string&,string&,int, int,int,int);
+void BKDR(string&,string&,int, int,int,int);
 void SDB(string&,string&,int, int,int,int);
 void DJB(string&,string&,int, int,int,int);
 void DEK(string&,string&,int, int,int,int);
@@ -55,6 +55,9 @@ int main(int argc, char* argv[])
     PJW(key,dblKey,eq,lop,lsa,add);
     cout <<endl;
     ELF(key,dblKey,eq,lop,lsa,add);
+    cout << endl;
+    BKDR(key,dblKey,eq,lop,lsa,add);
+    cout << endl;
 
    return true;
 }
@@ -84,5 +87,12 @@ void ELF(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
     cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< ELFHash(key,eq,lop,lsa,add)   <<endl;
     cout << "     Operations: " <<  eq+lop+lsa+add << endl;
     cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< ELFHash(dblKey,eq,lop,lsa,add)   <<endl;
+    cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
+}
+
+void BKDR(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
+    cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< BKDRHash(key,eq,lop,lsa,add)   <<endl;
+    cout << "     Operations: " <<  eq+lop+lsa+add << endl;
+    cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< BKDRHash(dblKey,eq,lop,lsa,add)   <<endl;
     cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
 }
