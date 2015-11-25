@@ -1,15 +1,24 @@
 #include "GeneralHashFunctions.h"
 
-unsigned int RSHash(const std::string& str)
+unsigned int RSHash(const std::string& str,
+                    int &eq, int &lop, int &lsa, int &add)
 {
+    eq=lop=lsa=add=0;
+    
    unsigned int b    = 378551;
    unsigned int a    = 63689;
    unsigned int hash = 0;
-
+    eq+=4;
+    
    for(std::size_t i = 0; i < str.length(); i++)
    {
+       
       hash = hash * a + str[i];
       a    = a * b;
+       eq+=2;
+       lsa+=4;
+       add+=1;
+       lop++;
    }
 
    return hash;
@@ -17,12 +26,18 @@ unsigned int RSHash(const std::string& str)
 /* End Of RS Hash Function */
 
 
-unsigned int JSHash(const std::string& str)
+unsigned int JSHash(const std::string& str,
+                    int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int hash = 1315423911;
-
+    eq+=2;
    for(std::size_t i = 0; i < str.length(); i++)
    {
+       eq++;
+       lsa+=4;
+       add++;
       hash ^= ((hash << 5) + str[i] + (hash >> 2));
    }
 
@@ -31,8 +46,11 @@ unsigned int JSHash(const std::string& str)
 /* End Of JS Hash Function */
 
 
-unsigned int PJWHash(const std::string& str)
+unsigned int PJWHash(const std::string& str,
+                     int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int BitsInUnsignedInt = (unsigned int)(sizeof(unsigned int) * 8);
    unsigned int ThreeQuarters     = (unsigned int)((BitsInUnsignedInt  * 3) / 4);
    unsigned int OneEighth         = (unsigned int)(BitsInUnsignedInt / 8);
@@ -55,8 +73,11 @@ unsigned int PJWHash(const std::string& str)
 /* End Of  P. J. Weinberger Hash Function */
 
 
-unsigned int ELFHash(const std::string& str)
+unsigned int ELFHash(const std::string& str,
+                     int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int hash = 0;
    unsigned int x    = 0;
 
@@ -75,8 +96,11 @@ unsigned int ELFHash(const std::string& str)
 /* End Of ELF Hash Function */
 
 
-unsigned int BKDRHash(const std::string& str)
+unsigned int BKDRHash(const std::string& str,
+                      int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int seed = 131; // 31 131 1313 13131 131313 etc..
    unsigned int hash = 0;
 
@@ -90,8 +114,11 @@ unsigned int BKDRHash(const std::string& str)
 /* End Of BKDR Hash Function */
 
 
-unsigned int SDBMHash(const std::string& str)
+unsigned int SDBMHash(const std::string& str,
+                      int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int hash = 0;
 
    for(std::size_t i = 0; i < str.length(); i++)
@@ -104,8 +131,11 @@ unsigned int SDBMHash(const std::string& str)
 /* End Of SDBM Hash Function */
 
 
-unsigned int DJBHash(const std::string& str)
+unsigned int DJBHash(const std::string& str,
+                     int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int hash = 5381;
 
    for(std::size_t i = 0; i < str.length(); i++)
@@ -118,8 +148,11 @@ unsigned int DJBHash(const std::string& str)
 /* End Of DJB Hash Function */
 
 
-unsigned int DEKHash(const std::string& str)
+unsigned int DEKHash(const std::string& str,
+                     int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
+    
    unsigned int hash = static_cast<unsigned int>(str.length());
 
    for(std::size_t i = 0; i < str.length(); i++)
@@ -132,8 +165,10 @@ unsigned int DEKHash(const std::string& str)
 /* End Of DEK Hash Function */
 
 
-unsigned int BPHash(const std::string& str)
+unsigned int BPHash(const std::string& str,
+                    int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
    unsigned int hash = 0;
    for(std::size_t i = 0; i < str.length(); i++)
    {
@@ -145,8 +180,10 @@ unsigned int BPHash(const std::string& str)
 /* End Of BP Hash Function */
 
 
-unsigned int FNVHash(const std::string& str)
+unsigned int FNVHash(const std::string& str,
+                     int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
    const unsigned int fnv_prime = 0x811C9DC5;
    unsigned int hash = 0;
    for(std::size_t i = 0; i < str.length(); i++)
@@ -160,8 +197,10 @@ unsigned int FNVHash(const std::string& str)
 /* End Of FNV Hash Function */
 
 
-unsigned int APHash(const std::string& str)
+unsigned int APHash(const std::string& str,
+                    int &eq, int &lop, int &lsa, int &add)
 {
+        eq=lop=lsa=add=0;
    unsigned int hash = 0xAAAAAAAA;
 
    for(std::size_t i = 0; i < str.length(); i++)

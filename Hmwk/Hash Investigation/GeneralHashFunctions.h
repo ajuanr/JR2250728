@@ -27,17 +27,17 @@
 typedef unsigned int (*HashFunction)(const std::string&);
 
 
-unsigned int RSHash  (const std::string& str);
-unsigned int JSHash  (const std::string& str);
-unsigned int PJWHash (const std::string& str);
-unsigned int ELFHash (const std::string& str);
-unsigned int BKDRHash(const std::string& str);
-unsigned int SDBMHash(const std::string& str);
-unsigned int DJBHash (const std::string& str);
-unsigned int DEKHash (const std::string& str);
-unsigned int BPHash  (const std::string& str);
-unsigned int FNVHash (const std::string& str);
-unsigned int APHash  (const std::string& str);
+unsigned int RSHash  (const std::string& str,int&,int&,int&,int&);
+unsigned int JSHash  (const std::string& str,int&,int&,int&,int&);
+unsigned int PJWHash (const std::string& str,int&,int&,int&,int&);
+unsigned int ELFHash (const std::string& str,int&,int&,int&,int&);
+unsigned int BKDRHash(const std::string& str,int&,int&,int&,int&);
+unsigned int SDBMHash(const std::string& str,int&,int&,int&,int&);
+unsigned int DJBHash (const std::string& str,int&,int&,int&,int&);
+unsigned int DEKHash (const std::string& str,int&,int&,int&,int&);
+unsigned int BPHash  (const std::string& str,int&,int&,int&,int&);
+unsigned int FNVHash (const std::string& str,int&,int&,int&,int&);
+unsigned int APHash  (const std::string& str,int&,int&,int&,int&);
 
 
 #endif
