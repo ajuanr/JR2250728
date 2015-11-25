@@ -25,6 +25,7 @@ using namespace std;
 
 void RS(string&,string&,int, int,int,int);
 void JS(string&,string&,int, int,int,int);
+void PJW(string&,string&,int, int,int,int);
 void ELF(string&,string&,int, int,int,int);
 void BKD(string&,string&,int, int,int,int);
 void SDB(string&,string&,int, int,int,int);
@@ -44,9 +45,15 @@ int main(int argc, char* argv[])
     int add; // []
     eq=lop=lsa=add=0;
     
+    cout << "key: " << key << endl;
+    cout << "double size of key\n\t" << dblKey << endl << endl;
+    
     RS(key,dblKey,eq,lop,lsa,add);
     cout << endl;
-    JS();
+    JS(key,dblKey,eq,lop,lsa,add);
+    cout << endl;
+    PJW(key,dblKey,eq,lop,lsa,add);
+    cout <<endl;
 //   cout << " 2. JS-Hash Function Value:   " <<setw(15)<< JSHash(key,eq,lop,lsa,add)   <<endl;
 //   cout << " 3. PJW-Hash Function Value:  " <<setw(15)<< PJWHash(key,eq,lop,lsa,add)  <<endl;
 //   cout << " 4. ELF-Hash Function Value:  " <<setw(15)<< ELFHash(key,eq,lop,lsa,add)  <<endl;
@@ -62,27 +69,22 @@ int main(int argc, char* argv[])
 }
 
 void RS(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
-    cout << "Key:     " <<key<<endl;
     cout << " 1. RS-Hash Function Value:   " <<setw(15)<< RSHash(key,eq,lop,lsa,add)   <<endl;
     cout << "     Operations: " <<  eq+lop+lsa+add << endl;
-    cout << dblKey << endl;
     cout << " 1. RS-Hash Function Value:   " <<setw(15)<< RSHash(dblKey,eq,lop,lsa,add)   <<endl;
     cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
 }
 
 void JS(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
-    string key = "abcdefghijklmnopqrstuvwxyz1234567890";
-    string dblKey=key+key;
-    int eq; // =
-    int lop; // ==, <, <=, >, >=
-    int lsa; // +, -, *, /
-    int add; // []
-    eq=lop=lsa=add=0;
-    
-    cout << "Key:     " <<key<<endl;
-    cout << " 1. RS-Hash Function Value:   " <<setw(15)<< JSHash(key,eq,lop,lsa,add)   <<endl;
+    cout << " 2. JS-Hash Function Value:   " <<setw(15)<< JSHash(key,eq,lop,lsa,add)   <<endl;
     cout << "     Operations: " <<  eq+lop+lsa+add << endl;
-    cout << dblKey << endl;
-    cout << " 1. RS-Hash Function Value:   " <<setw(15)<< JSHash(dblKey,eq,lop,lsa,add)   <<endl;
+    cout << " 2. JS-Hash Function Value:   " <<setw(15)<< JSHash(dblKey,eq,lop,lsa,add)   <<endl;
+    cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
+}
+
+void PJW(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
+    cout << " 3. PJW-Hash Function Value:   " <<setw(15)<< PJWHash(key,eq,lop,lsa,add)   <<endl;
+    cout << "     Operations: " <<  eq+lop+lsa+add << endl;
+    cout << " 3. PJW-Hash Function Value:   " <<setw(15)<< PJWHash(dblKey,eq,lop,lsa,add)   <<endl;
     cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
 }

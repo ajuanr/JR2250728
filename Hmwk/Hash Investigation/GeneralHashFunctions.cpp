@@ -58,12 +58,20 @@ unsigned int PJWHash(const std::string& str,
    unsigned int hash              = 0;
    unsigned int test              = 0;
 
+    eq+=7;
    for(std::size_t i = 0; i < str.length(); i++)
    {
+       eq++;
+       lsa++;
+       add++;
       hash = (hash << OneEighth) + str[i];
 
+       eq++;
+       lop++;
       if((test = hash & HighBits)  != 0)
       {
+          eq++;
+          lop++;
          hash = (( hash ^ (test >> ThreeQuarters)) & (~HighBits));
       }
    }
