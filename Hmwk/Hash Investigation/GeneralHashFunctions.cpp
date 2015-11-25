@@ -88,14 +88,21 @@ unsigned int ELFHash(const std::string& str,
     
    unsigned int hash = 0;
    unsigned int x    = 0;
-
+    eq+=3;
+    
    for(std::size_t i = 0; i < str.length(); i++)
    {
+       eq+=2;
+       add++;
       hash = (hash << 4) + str[i];
+       lop++;
       if((x = hash & 0xF0000000L) != 0)
       {
+          eq++;
+          lop++;
          hash ^= (x >> 24);
       }
+       eq++;
       hash &= ~x;
    }
 

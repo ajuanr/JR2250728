@@ -54,16 +54,7 @@ int main(int argc, char* argv[])
     cout << endl;
     PJW(key,dblKey,eq,lop,lsa,add);
     cout <<endl;
-//   cout << " 2. JS-Hash Function Value:   " <<setw(15)<< JSHash(key,eq,lop,lsa,add)   <<endl;
-//   cout << " 3. PJW-Hash Function Value:  " <<setw(15)<< PJWHash(key,eq,lop,lsa,add)  <<endl;
-//   cout << " 4. ELF-Hash Function Value:  " <<setw(15)<< ELFHash(key,eq,lop,lsa,add)  <<endl;
-//   cout << " 5. BKDR-Hash Function Value: " <<setw(15)<< BKDRHash(key,eq,lop,lsa,add) <<endl;
-//   cout << " 6. SDBM-Hash Function Value: " <<setw(15)<< SDBMHash(key,eq,lop,lsa,add) <<endl;
-//   cout << " 7. DJB-Hash Function Value:  " <<setw(15)<< DJBHash(key,eq,lop,lsa,add)  <<endl;
-//   cout << " 8. DEK-Hash Function Value:  " <<setw(15)<< DEKHash(key,eq,lop,lsa,add)  <<endl;
-//   cout << " 9. FNV-Hash Function Value:  " <<setw(15)<< FNVHash(key,eq,lop,lsa,add)  <<endl;
-//   cout << "10. BP-Hash Function Value:   " <<setw(15)<< BPHash(key,eq,lop,lsa,add)   <<endl;
-//   cout << "11. AP-Hash Function Value:   " <<setw(15)<< APHash(key,eq,lop,lsa,add)   <<endl;
+    ELF(key,dblKey,eq,lop,lsa,add);
 
    return true;
 }
@@ -86,5 +77,12 @@ void PJW(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
     cout << " 3. PJW-Hash Function Value:   " <<setw(15)<< PJWHash(key,eq,lop,lsa,add)   <<endl;
     cout << "     Operations: " <<  eq+lop+lsa+add << endl;
     cout << " 3. PJW-Hash Function Value:   " <<setw(15)<< PJWHash(dblKey,eq,lop,lsa,add)   <<endl;
+    cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
+}
+
+void ELF(string& key, string& dblKey, int eq, int lop, int lsa, int add) {
+    cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< ELFHash(key,eq,lop,lsa,add)   <<endl;
+    cout << "     Operations: " <<  eq+lop+lsa+add << endl;
+    cout << " 4. ELF-Hash Function Value:   " <<setw(15)<< ELFHash(dblKey,eq,lop,lsa,add)   <<endl;
     cout << "     Doubled size, # operations: " <<  eq+lop+lsa+add << endl;
 }
