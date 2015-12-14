@@ -14,12 +14,13 @@
 
 class Edge {
 public:
-    Edge(Vertex v):a(v), b(a){};
-    Edge(Vertex v, Vertex w): a(v), b(w){};
-    Vertex& mate(Vertex v){return (v.get()==a.get())?b:a;}
+    Edge(Vertex v):src(v), dest(v){};
+    Edge(Vertex v, Vertex w): src(v), dest(w){};
+    Vertex& mate(Vertex v){return (v.get()==src.get())?dest:src;}
 private:
-    Vertex a;
-    Vertex b;
+    Vertex src;
+    Vertex dest;
+    int weight;
 };
 
 #endif /* Edge_hpp */
