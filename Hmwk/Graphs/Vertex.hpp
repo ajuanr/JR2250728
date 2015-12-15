@@ -15,7 +15,7 @@ class Vertex {
 public:
     Vertex():id(0), visited(false){};
     Vertex(std::string val):id(val), visited(false){};
-    std::string get() {return id;}
+    std::string get() const{return id;}
     void visit() {visited = true;}
     void unvisit() {visited = false;}
     operator std::string () {return id;}

@@ -16,13 +16,18 @@
 
 class Graph {
 public:
+    typedef std::map<Vertex, std::set<Vertex> > graphContainer;
+    
     Graph():numVertices(0), numEdges(0) {}
     Graph(const Edge&);
     Graph(const Vertex&);
     void addEdge(const Edge&);
+    void addEdge(const Vertex&,const Vertex&, int weight);
     void addVertex(const Vertex&);
+    
+    void print() const;
 private:
-    std::map<Vertex, std::set<Vertex> > graph;
+    graphContainer graph;
     int numVertices;
     int numEdges;
 };
