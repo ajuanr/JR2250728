@@ -25,4 +25,5 @@ private:
     bool visited;
 };
 
+
 #endif /* Vertex_hpp */

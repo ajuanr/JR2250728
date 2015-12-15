@@ -10,8 +10,6 @@
 #include <iostream>
 
 /// User libraries
-#include "Vertex.hpp"
-#include "Edge.hpp"
 #include "Graph.hpp"
 
 using namespace std;

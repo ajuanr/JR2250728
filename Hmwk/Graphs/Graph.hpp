@@ -27,20 +27,5 @@ private:
     int numEdges;
 };
 
-//*******************************
-//**** operator overloading *****
-//*******************************
-bool operator< (const Vertex &lhs, const Vertex &rhs ) {
-    if (lhs < rhs) return true;
-    if (rhs < lhs) return false;
-    return lhs < rhs;
-}
-
-bool operator< (const Edge &lhs, const Edge &rhs) {
-    if (lhs.Src() < rhs.Src()) return true;
-    if (rhs.Src() < lhs.Src()) return false;
-    return lhs.Dest() < rhs.Dest();
-}
-
 
 #endif /* Graph_hpp */
