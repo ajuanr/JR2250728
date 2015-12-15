@@ -9,18 +9,19 @@
 #ifndef Vertex_hpp
 #define Vertex_hpp
 
+#include <string>
 
 class Vertex {
 public:
     Vertex():id(0), visited(false){};
-    Vertex(int val):id(val), visited(false){};
-    int get() {return id;}
+    Vertex(std::string val):id(val), visited(false){};
+    std::string get() {return id;}
     void visit() {visited = true;}
     void unvisit() {visited = false;}
-    operator int () {return id;}
+    operator std::string () {return id;}
     
 private:
-    int id;
+    std::string id;
     bool visited;
 };
 
