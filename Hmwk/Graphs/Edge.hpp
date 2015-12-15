@@ -9,6 +9,7 @@
 #ifndef Edge_hpp
 #define Edge_hpp
 
+
 #include "Vertex.hpp"
 
 class Edge {

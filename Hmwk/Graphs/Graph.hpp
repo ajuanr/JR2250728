@@ -12,15 +12,15 @@
 #include <map>
 #include <set>
 
-#include "Edge.cpp"
+#include "Edge.hpp"
 
 class Graph {
 public:
     Graph():numVertices(0), numEdges(0) {}
-    Graph(Edge&);
-    Graph(Vertex&);
-    void addEdge(Edge&);
-    void addVertex(Vertex&);
+    Graph(const Edge&);
+    Graph(const Vertex&);
+    void addEdge(const Edge&);
+    void addVertex(const Vertex&);
 private:
     std::map<Vertex, std::set<Vertex> > graph;
     int numVertices;

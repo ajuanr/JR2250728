@@ -25,9 +25,4 @@ private:
     bool visited;
 };
 
-//bool operator<(const Vertex &a, const Vertex &b) {
-//    return a<b;
-//}
-
-
 #endif /* Vertex_hpp */
