@@ -16,7 +16,7 @@
 
 class Graph {
 public:
-    typedef std::map<Vertex, std::set<Vertex> > graphContainer;
+    typedef std::map<Vertex, std::set<Edge> > graphContainer;
     
     Graph():numVertices(0), numEdges(0) {}
     Graph(const Edge&);

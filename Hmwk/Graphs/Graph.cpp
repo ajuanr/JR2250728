@@ -26,8 +26,7 @@ void Graph::addVertex(const Vertex &v) {
 }
 
 void Graph::addEdge(const Edge &e) {
-    graph[e.Src()].insert(e.Dest());
-    graph[e.Dest()].insert(e.Src());
+    graph[e.Src()].insert(e);
 }
 
 void Graph::addEdge(const Vertex &a, const Vertex &b, int weight) {
@@ -41,9 +40,9 @@ void Graph::print() const {
     for (graphContainer::const_iterator it = graph.begin(); it != graph.end();
      ++it) {
         cout << it->first.get();
-        for (set<Vertex>::const_iterator sit = it->second.begin();
+        for (set<Edge>::const_iterator sit = it->second.begin();
              sit != it->second.end(); ++sit) {
-            cout << " - "<<  "> " << sit->get();
+            cout << " - "<< sit->Weight() <<  " > " << sit->Dest().get();
         }
         cout << endl;
     }

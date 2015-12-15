@@ -18,7 +18,7 @@ public:
     std::string get() const{return id;}
     void visit() {visited = true;}
     void unvisit() {visited = false;}
-    operator std::string () {return id;}
+    operator std::string() {return id;}
     
 private:
     std::string id;

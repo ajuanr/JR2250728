@@ -14,28 +14,33 @@
 
 using namespace std;
 
+void problem6();
+
 int main(int argc, const char * argv[]) {
-    Vertex a("a");
-    Vertex b("b");
-    Vertex c("c");
-    Vertex d("d");
-    Vertex e("e");
-    Edge edge(a, b, 12);
     
-    Graph *graph = new Graph();
-    graph->addVertex(a);
-    graph->addVertex(b);
-    graph->addEdge(edge);
-    
-    graph->addEdge(a, c, 10);
-    graph->addEdge(b, c, 15);
-    graph->addEdge(d, c, 10);
-    graph->addEdge(d, e, 20);
-    graph->addEdge(d, e, 12);
-    
-    graph->print();
-    
-    delete graph;
+    problem6();
     
     return 0;
+}
+
+void problem6() {
+    Vertex sfo("SFO");
+    Vertex bos("BOS");
+    Vertex ord("ORD");
+    Vertex jfk("JFK");
+    Vertex dfw("DFW");
+    Vertex mia("MIA");
+    Vertex lax("LAX");
+    
+    Graph *air = new Graph();
+    air->addEdge(sfo, bos, 2704);
+    air->addEdge(sfo, ord, 1846);
+    air->addEdge(ord, bos, 867);
+    air->addEdge(ord, jfk, 740);
+    air->addEdge(jfk, bos, 187);
+    air->addEdge(sfo, dfw, 1464);
+    
+    air->print();
+    
+    delete air;
 }
