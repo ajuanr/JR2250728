@@ -14,8 +14,11 @@
 
 class Graph {
 public:
+    Graph():numVertices(0), numEdges(0) {}
 private:
-    std::list<Edge> vertices;
+    std::list<Edge> edges;
+    int numVertices;
+    int numEdges;
 };
 
 #endif /* Graph_hpp */
