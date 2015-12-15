@@ -9,16 +9,38 @@
 #ifndef Graph_hpp
 #define Graph_hpp
 
+#include <map>
+#include <set>
+
 #include "Edge.cpp"
-#include <list>
 
 class Graph {
 public:
     Graph():numVertices(0), numEdges(0) {}
+    Graph(Edge&);
+    Graph(Vertex&);
+    void addEdge(Edge&);
+    void addVertex(Vertex&);
 private:
-    std::list<Edge> edges;
+    std::map<Vertex, std::set<Vertex> > graph;
     int numVertices;
     int numEdges;
 };
+
+//*******************************
+//**** operator overloading *****
+//*******************************
+bool operator< (const Vertex &lhs, const Vertex &rhs ) {
+    if (lhs < rhs) return true;
+    if (rhs < lhs) return false;
+    return lhs < rhs;
+}
+
+bool operator< (const Edge &lhs, const Edge &rhs) {
+    if (lhs.Src() < rhs.Src()) return true;
+    if (rhs.Src() < lhs.Src()) return false;
+    return lhs.Dest() < rhs.Dest();
+}
+
 
 #endif /* Graph_hpp */
