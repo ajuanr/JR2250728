@@ -207,7 +207,6 @@ void LnkdLst<T>::insert_before(iterator it, T val) {
 
 template <class T>
 T LnkdLst<T>::get(int index) const {
-    if (head) {
         int i = 0;
         iterator worker = head;
         while (i<=index && worker) {
@@ -218,8 +217,7 @@ T LnkdLst<T>::get(int index) const {
     if (worker) {
         return worker->data;
     }
-    }
-    return -1;
+    return 2;
 }
 
 #endif /* LnkdLst_h */
