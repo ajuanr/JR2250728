@@ -6,6 +6,8 @@
 //  Copyright © 2015 Juan Ruiz. All rights reserved.
 //
 
+/// Mac OS X 10.11.2
+
 /// system libraries
 #include <fstream>
 #include <iostream>
@@ -25,16 +27,15 @@
 using namespace std;
 
 /// Typedefs
-typedef map<string, LnkdLst<int> > svMap;
+typedef map<string, LnkdLst<int> > slMap; /// string, list map
 
 /// Functions
 void analyzeMoves(Queue<int>*);
 int playOnce();
-void printData(const svMap&, ostream& =cout); // print previous game histories
-void loadData(ifstream&, svMap&);
+void printData(const slMap&, ostream& =cout); // print previous game histories
+void loadData(ifstream&, slMap&);
 SimpleVector<string> split(const string&);
-set<int> highScores(const svMap &m);
-void printScores(const set<int>& s);
+BTree* highScores(const slMap &m);
 
 int main(int argc, const char * argv[]) {
     cout << "Enter your name: ";
@@ -42,19 +43,20 @@ int main(int argc, const char * argv[]) {
     cin >> name;
     
     ifstream inFile("PlayerScores.txt");
-    svMap lData; /// holds players data
+    slMap lData; /// holds players' loaded data
     loadData(inFile, lData);
     inFile.close();
     
     int score = playOnce();
     lData[name].append(score);
+    cout << endl;
     
     /// after games are played, save scores to the file
     ofstream outFile("PlayerScores.txt");
 
     if (outFile.is_open()) {
-    printData(lData, outFile);
-    outFile.close();
+        printData(lData, outFile);
+        outFile.close();
     }
     else
         cout << "File failed to open";
@@ -63,11 +65,14 @@ int main(int argc, const char * argv[]) {
     char q;
     cin >> q;
     if (q=='y') {
-    cout << "Printing player scores:\n";
-    printData(lData);
-
-    set<int> scores = highScores(lData);
-    //printScores(scores);
+        cout << "Printing player scores:\n";
+        printData(lData);
+        
+        BTree *scores = highScores(lData);
+        cout << "list of scores:\n";
+        scores->inorder();
+        cout << endl;
+        delete scores;
     }
     
     return 0;
@@ -119,15 +124,15 @@ int playOnce() {
 }
 
 /// Function printData prints the data in the map to the screeen or a file
-void printData(const svMap& m, ostream& out) {
-    for(svMap::const_iterator it = m.begin();
+void printData(const slMap& m, ostream& out) {
+    for(slMap::const_iterator it = m.begin();
         it != m.end(); ++it) {
         /// Print the name
         out << it->first << " ";
-        /// Print the associated scores
-        out << it->second.get(0);
-        for (int i = 1; i != it->second.getSize(); ++i) {
-            out << " " << it->second.get(i);
+        LnkdLst<int>::const_iterator lit = it->second.begin();
+        out << lit->data;
+        for (lit = lit->next; lit; lit=lit->next) {
+            out << " " << lit->data;
         }
         out << endl;
     }
@@ -135,7 +140,7 @@ void printData(const svMap& m, ostream& out) {
 }
 
 /// This funtion reads in previous data from a file
-void loadData(ifstream& inFile, svMap& m) {
+void loadData(ifstream& inFile, slMap& m) {
     string line;
     if (!inFile.is_open()) {
         cout << "Scores file not found\n";
@@ -186,7 +191,7 @@ void analyzeMoves(Queue<int>* s) {
     int n;
     int count=0;
     
-    while(n=s->pop()) {
+    while((n=s->pop())) {
         ++count;
         total+=n;
         cout << "Move took: " << n << " seconds" << endl;
@@ -198,34 +203,16 @@ void analyzeMoves(Queue<int>* s) {
     << " seconds\n";
 }
 
-set<int> highScores(const svMap &m) {
-    set<int> out;
+BTree* highScores(const slMap &m) {
+    BTree *out=new BTree();
     /// Go through each name
-    for(svMap::const_iterator it = m.begin(); it != m.end(); ++it) {
+    for(slMap::const_iterator it = m.begin(); it != m.end(); ++it) {
         /// Go through each score
-        for(int i = 0; i != it->second.getSize(); ++i) {
-            /// add that score to the set
-            out.insert(it->second.get(i));
+        for (LnkdLst<int>::const_iterator lit = it->second.begin();
+             lit; lit = lit->next) {
+            /// add the score to the set
+                out->insert(lit->data);
         }
     }
     return out;
-}
-
-void printScores(const set<int>& s) {
-    cout << "Printing unique scores\n";
-    //    Stack<int> *temp = new Stack<int>(0);
-    BTree *temp = new BTree();
-    for (set<int>::const_iterator cit = s.begin(); cit != s.end(); ++cit){
-        cout << "inserting: " << *cit << endl;
-        temp->insert(*cit);
-    }
-    temp->inorder();
-    cout << endl;
-    delete temp;
-    //    cout << endl;
-    //    int score;
-    //    while(score=temp->pop()) {
-    //        cout << score << " ";
-    //    }
-    //    cout << endl;
 }

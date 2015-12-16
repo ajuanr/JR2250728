@@ -12,9 +12,24 @@
 
 using namespace std;
 
+//
+//  BTree.cpp
+//  BTree
+//
+//  Created by Juan on 11/21/15.
+//  Copyright © 2015 Juan. All rights reserved.
+//
+
+#include <iostream>
+
+#include "BTree.hpp"
+
+using namespace std;
+
 BTree::BTree(int val) {
     root = create(val);
 }
+
 
 /// Functions creates a node in the tree
 BTree::iterator BTree::create(int val) {
@@ -22,11 +37,14 @@ BTree::iterator BTree::create(int val) {
     node->data = val;
     node->left=NULL;
     node->right=NULL;
-    node->height=1;
     
     return node;
 }
 
+///// function prints the tree in sorted order
+//void BTree::inorder() {
+//    inorder(root);
+//}
 
 /// function prints the tree starting at a certain node
 void BTree::inorder(iterator node) const {
@@ -72,46 +90,28 @@ void BTree::insert(int val) {
     }
 }
 
-BTree::iterator BTree::insert(int val, iterator node)
-{
-    if (node == NULL)
-        return (create(val));
-    
-    if (val < node->data)
-        node->left  = insert(val, node->left);
-    else
-        node->right = insert(val, node->right);
-    
-    node->height = max(height(node->left), height(node->right)) + 1;
-    
-    int bal = balance(node);
-    
-    // If this node becomes unbalanced, then there are 4 cases
-    
-    // Left Left Case
-    if (bal > 1 && val < node->left->data)
-        return rightRotate(node);
-    
-    // Right Right Case
-    if (bal < -1 && val > node->right->data)
-        return leftRotate(node);
-    
-    // Left Right Case
-    if (bal > 1 && val > node->left->data)
-    {
-        node->left =  leftRotate(node->left);
-        return rightRotate(node);
+/// add a val to the tree, attached to the 'node'
+void BTree::insert(int val, iterator node) {
+    if (node) {
+        /// val < root goes on left
+        if(val < node->data) {
+            /// check if node exists
+            if (node->left==NULL) {
+                node->left = create(val);
+                return;
+            }
+            insert(val, node->left);
+        }
+        /// data was greater than root, put on right
+        else {
+            /// check if node exists
+            if(node->right==NULL) {
+                node->right = create(val);
+                return;
+            }
+            insert(val, node->right);
+        }
     }
-    
-    // Right Left Case
-    if (bal < -1 && val < node->right->data)
-    {
-        node->right = rightRotate(node->right);
-        return leftRotate(node);
-    }
-    
-    /* return the (unchanged) node pointer */
-    return node;
 }
 
 BTree::iterator BTree::find(int val) {
@@ -130,13 +130,10 @@ BTree::iterator BTree::find(int val, iterator node) {
     return node;
 }
 
-/// this function removes a value from the tree
 void BTree::remove(int val) {
     remove(val, root);
 }
 
-
-/// this function removes a value from the tree
 BTree::iterator BTree::remove(int val, iterator node) {
     if (node == NULL) {
         return node;
@@ -183,54 +180,4 @@ BTree::iterator BTree::minNode(iterator node) const {
         return node;
     else
         return minNode(node->left);
-}
-
-
-int BTree::height(iterator node) const {
-    if (node == NULL) {
-        return 0;
-    }
-    return node->height;
-}
-
-
-///*****************************
-///******* AVL Stuff ***********
-///*****************************
-BTree::iterator BTree::rightRotate(iterator pivot) {
-    iterator x = pivot->left;
-    iterator T2 = x->right;
-    
-    // Perform rotation
-    x->right = pivot;
-    pivot->left = T2;
-    
-    // Update heights
-    pivot->height = max(height(pivot->left), height(pivot->right))+1;
-    x->height = max(height(x->left), height(x->right))+1;
-    
-    // Return new root
-    return x;
-}
-
-BTree::iterator BTree::leftRotate(iterator pivot) {
-    iterator y = pivot->right;
-    iterator T2 = y->left;
-    
-    // Perform rotation
-    y->left = pivot;
-    pivot->right = T2;
-    
-    //  Update heights
-    pivot->height = max(height(pivot->left), height(pivot->right))+1;
-    y->height = max(height(y->left), height(y->right))+1;
-    
-    // Return new root
-    return y;
-}
-
-int BTree::balance(iterator node) {
-    if (node == NULL)
-        return 0;
-    return height(node->left) - height(node->right);
 }

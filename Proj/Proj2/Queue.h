@@ -62,25 +62,6 @@ void Queue<T>::push(T n){
 }
 
 template<class T>
-string Queue<T>::toString(){
-    string build="";
-    char counter=48;
-    if(head){
-        Node* worker=head;
-        do{
-            build+=("Data element in the list ->");
-            stringstream ss;
-            ss<<worker->data;
-            string data;
-            ss>>data;
-            build+=data;
-            build+="\n";
-        }while(worker=worker->next);
-    }
-    return build;
-}
-
-template<class T>
 Queue<T>::~Queue() {
     if(head){
         Node* worker = head;

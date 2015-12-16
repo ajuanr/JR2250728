@@ -50,10 +50,9 @@ public:
     iterator minNode(iterator) const;
 private:
     struct Node {
-    int data;
-    int height;
-    iterator left;
-    iterator right;
+        int data;
+        iterator left;
+        iterator right;
     };
     
     iterator root;
@@ -64,21 +63,14 @@ private:
     iterator create(int);
     int getData(iterator node) const {return node->data;}
     
-    iterator insert(int, iterator);
+    void insert(int, iterator);
     iterator remove(int, iterator);
-    int height(iterator) const;
     
     void destroy(iterator);
     
     void inorder(iterator) const;
     void preorder(iterator) const;
     void postOrder(iterator) const;
-    
-    /// AVL functions
-    int max(int a, int b) { return (a>b)?a:b;}
-    iterator rightRotate(iterator);
-    iterator leftRotate(iterator);
-    int balance(iterator);
 };
 
 #endif /* BTree_hpp */
