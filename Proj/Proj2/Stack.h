@@ -30,7 +30,6 @@ private:
         Node *next;
     };
     Node *head;
-    Node *worker;
 
     T dltHead();
 };
@@ -48,7 +47,7 @@ template<class T>
 void Stack<T>::push(T n){
     Node *prev;
     if(head){
-        worker=head;
+        Node* worker=head;
         do{
             prev=worker;
         }while(worker=worker->next);
@@ -69,7 +68,7 @@ string Stack<T>::toString(){
     string build="";
     char counter=48;
     if(head){
-        worker=head;
+        Node* worker=head;
         do{
             build+=("Data element in the list ->");
             stringstream ss;
@@ -86,7 +85,7 @@ string Stack<T>::toString(){
 template<class T>
 Stack<T>::~Stack() {
     if(head){
-        worker = head;
+        Node* worker = head;
         do{
             worker=head;
             head=head->next;
@@ -99,7 +98,7 @@ template<class T>
 T Stack<T>::dltHead() {
     // head is not the only node
     if(head) {
-        worker=head;
+        Node* worker=head;
         T temp=worker->data;
         // list has at least two nodes
         if(head->next) {
@@ -122,7 +121,7 @@ T Stack<T>::pop() {
     if (head) {
         T temp;
         Node *prev = head;
-        worker = head;
+        Node* worker = head;
         while (worker=worker->next) {
             if (worker->next) prev=worker;
         }

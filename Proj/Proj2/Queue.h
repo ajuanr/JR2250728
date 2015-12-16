@@ -30,7 +30,6 @@ private:
         Node *next;
     };
     Node *head;
-    Node *worker;
     
 };
 
@@ -46,7 +45,7 @@ template<class T>
 void Queue<T>::push(T n){
     Node *prev;
     if(head){
-        worker=head;
+        Node *worker=head;
         do{
             prev=worker;
         }while(worker=worker->next);
@@ -67,7 +66,7 @@ string Queue<T>::toString(){
     string build="";
     char counter=48;
     if(head){
-        worker=head;
+        Node* worker=head;
         do{
             build+=("Data element in the list ->");
             stringstream ss;
@@ -84,7 +83,7 @@ string Queue<T>::toString(){
 template<class T>
 Queue<T>::~Queue() {
     if(head){
-        worker = head;
+        Node* worker = head;
         do{
             worker=head;
             head=head->next;
@@ -97,7 +96,7 @@ template<class T>
 T Queue<T>::pop() {
     // head is not the only node
     if(head) {
-        worker=head;
+        Node* worker=head;
         T temp=worker->data;
         // list has at least two nodes
         if(head->next) {
