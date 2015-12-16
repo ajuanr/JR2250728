@@ -219,7 +219,7 @@ T LnkdLst<T>::get(int index) const {
         return worker->data;
     }
     }
-    return T();
+    return -1;
 }
 
 #endif /* LnkdLst_h */

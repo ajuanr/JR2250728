@@ -18,6 +18,7 @@
 #include "LnkdLst.h"
 #include "Minesweeper.hpp"
 #include "Stack.h"
+#include "BTree.hpp"
 #include "SimpleVector.h"
 #include "Queue.h"
 
@@ -29,10 +30,10 @@ typedef map<string, LnkdLst<int> > svMap;
 /// Functions
 void analyzeMoves(Queue<int>*);
 int playOnce();
-void printData(svMap&, ostream& =cout); // print previous game histories
+void printData(const svMap&, ostream& =cout); // print previous game histories
 void loadData(ifstream&, svMap&);
 SimpleVector<string> split(const string&);
-set<int> highScores(svMap &m);
+set<int> highScores(const svMap &m);
 void printScores(const set<int>& s);
 
 int main(int argc, const char * argv[]) {
@@ -66,7 +67,7 @@ int main(int argc, const char * argv[]) {
     printData(lData);
 
     set<int> scores = highScores(lData);
-    printScores(scores);
+    //printScores(scores);
     }
     
     return 0;
@@ -118,8 +119,8 @@ int playOnce() {
 }
 
 /// Function printData prints the data in the map to the screeen or a file
-void printData(svMap& m, ostream& out) {
-    for(svMap::iterator it = m.begin();
+void printData(const svMap& m, ostream& out) {
+    for(svMap::const_iterator it = m.begin();
         it != m.end(); ++it) {
         /// Print the name
         out << it->first << " ";
@@ -197,10 +198,10 @@ void analyzeMoves(Queue<int>* s) {
     << " seconds\n";
 }
 
-set<int> highScores(svMap &m) {
+set<int> highScores(const svMap &m) {
     set<int> out;
     /// Go through each name
-    for(svMap::iterator it = m.begin(); it != m.end(); ++it) {
+    for(svMap::const_iterator it = m.begin(); it != m.end(); ++it) {
         /// Go through each score
         for(int i = 0; i != it->second.getSize(); ++i) {
             /// add that score to the set
@@ -212,16 +213,19 @@ set<int> highScores(svMap &m) {
 
 void printScores(const set<int>& s) {
     cout << "Printing unique scores\n";
-    Stack<int> *temp = new Stack<int>(0);
+    //    Stack<int> *temp = new Stack<int>(0);
+    BTree *temp = new BTree();
     for (set<int>::const_iterator cit = s.begin(); cit != s.end(); ++cit){
-        temp->push(*cit);
-        cout << *cit << " ";
+        cout << "inserting: " << *cit << endl;
+        temp->insert(*cit);
     }
+    temp->inorder();
     cout << endl;
-    int score;
-    while(score=temp->pop()) {
-        cout << score << " ";
-    }
-    cout << endl;
-    
+    delete temp;
+    //    cout << endl;
+    //    int score;
+    //    while(score=temp->pop()) {
+    //        cout << score << " ";
+    //    }
+    //    cout << endl;
 }
