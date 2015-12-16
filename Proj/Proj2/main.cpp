@@ -19,7 +19,6 @@
 /// user libraries
 #include "LnkdLst.h"
 #include "Minesweeper.hpp"
-#include "Stack.h"
 #include "BTree.hpp"
 #include "SimpleVector.h"
 #include "Queue.h"
