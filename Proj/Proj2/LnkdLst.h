@@ -41,6 +41,8 @@ public:
     void insert_after(iterator, T);
     void remove(iterator);
     
+    T get(int) const;
+    T getSize() const {return size;}
     /// operator overloading
     LnkdLst operator=(const LnkdLst&);
     
@@ -52,6 +54,7 @@ private:
     
     /// data
     iterator head;
+    int size;
     
     /// Utility functions
     iterator create(T);
@@ -62,13 +65,13 @@ private:
 
 /// Create an empty list
 template <class T>
-LnkdLst<T>::LnkdLst() {
+LnkdLst<T>::LnkdLst():size(0) {
     head=NULL;
 }
 
 /// Construct a new list with an initial value
 template <class T>
-LnkdLst<T>::LnkdLst(T val) {
+LnkdLst<T>::LnkdLst(T val):size(0) {
     head = create(val);
 }
 
@@ -81,6 +84,7 @@ LnkdLst<T>::~LnkdLst() {
             destroy(worker);
         } while ((worker=worker->next));
     }
+    size=0;
 }
 
 /// Function create creates a new node and return it
@@ -89,7 +93,7 @@ typename LnkdLst<T>::iterator LnkdLst<T>::create(T val) {
     iterator clink = new Node;
     clink->data = val;
     clink->next=NULL;
-    
+    ++size;
     return clink;
 }
 
@@ -120,8 +124,10 @@ void LnkdLst<T>::prepend(T val) {
 /// This function deletes a node
 template <class T>
 void LnkdLst<T>::destroy(iterator node) {
-    if (node)
+    if (node){
         delete node;
+        --size;
+    }
 }
 
 /// This function removes a node from the list
@@ -197,6 +203,23 @@ void LnkdLst<T>::insert_before(iterator it, T val) {
         else
             predecessor(it)->next = before;
     }
+}
+
+template <class T>
+T LnkdLst<T>::get(int index) const {
+    if (head) {
+        int i = 0;
+        iterator worker = head;
+        while (i<=index && worker) {
+            ++i;
+            worker=worker->next;
+        }
+    
+    if (worker) {
+        return worker->data;
+    }
+    }
+    return T();
 }
 
 #endif /* LnkdLst_h */

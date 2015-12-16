@@ -62,7 +62,7 @@ int main(int argc, const char * argv[]) {
     char q;
     cin >> q;
     if (q=='y') {
-    cout << "Printing player scores: ";
+    cout << "Printing player scores:\n";
     printData(lData);
 
     set<int> scores = highScores(lData);
