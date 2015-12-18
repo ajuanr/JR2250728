@@ -140,7 +140,7 @@ void postGame(const slMap &data) {
         printData(data);
         
         BTree *scores = highScores(data);
-        cout << "list of scores:\n";
+        cout << "list of scores sorted with binary tree:\n";
         scores->inorder();
         cout << endl;
         delete scores;
@@ -235,16 +235,13 @@ void analyzeMoves(Queue<int>* s) {
 
 BTree* highScores(const slMap &m) {
     BTree *out=new BTree();
-    /// Go through each name
+    //f/ Go through each name
     for(slMap::const_iterator it = m.begin(); it != m.end(); ++it) {
         /// Go through each score
         for (LnkdLst<int>::const_iterator lit = it->second.begin();
              lit; lit = lit->next) {
             /// add the score to the set
-            if (!out->find(lit->data)) {
-                    cout << "data found\n";
                 out->insert(lit->data);
-            }
         }
     }
     return out;
