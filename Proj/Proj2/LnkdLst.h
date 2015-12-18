@@ -26,12 +26,11 @@ public:
     LnkdLst(const LnkdLst&);   /// copy constructor
     ~LnkdLst();
     
-    /// begin and end
+    /// iterator stuff
     iterator begin() { return head; }
     const_iterator begin() const { return head;}
     iterator end() { return NULL;}
     iterator end() const {return NULL;}
-    
     iterator find(T) const;
     
     /// add/remove
@@ -43,6 +42,9 @@ public:
     
     T get(int) const;
     T getSize() const {return size;}
+    
+    bool empty() const { return !head;}
+    
     /// operator overloading
     LnkdLst operator=(const LnkdLst&);
     

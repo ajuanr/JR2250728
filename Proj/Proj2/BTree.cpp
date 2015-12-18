@@ -121,7 +121,6 @@ BTree::iterator BTree::find(int val) {
 BTree::iterator BTree::find(int val, iterator node) {
     if (node) {
         if (node->data==val) {
-            cout << "Found val: " << val << endl;
             return node;
         }
         find(val,node->left);

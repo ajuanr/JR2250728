@@ -34,9 +34,24 @@ int playOnce();
 void printData(const slMap&, ostream& =cout); // print previous game histories
 void loadData(ifstream&, slMap&);
 SimpleVector<string> split(const string&);
-BTree* highScores(const slMap &m);
+BTree* highScores(const slMap &);
+
+
+/// hash functions stuff
+int simpleHash(char c);
+char getInitial(string name);
+LnkdLst<string>* intoArray(const slMap&);
+void printCollisions(LnkdLst<string>*);
+void postGame(const slMap&);
+
+///**************************************************************
+///*************************** Main *****************************
+///**************************************************************
 
 int main(int argc, const char * argv[]) {
+    cout << "MINESWEEPER\n";
+    cout << "10 points for every move.\n"
+        "-1 point every ten seconds.\n\n";
     cout << "Enter your name: ";
     string name;
     cin >> name;
@@ -60,22 +75,16 @@ int main(int argc, const char * argv[]) {
     else
         cout << "File failed to open";
     
-    cout << "Woud you like to see player scores? 'y' for yes: ";
-    char q;
-    cin >> q;
-    if (q=='y') {
-        cout << "Printing player scores:\n";
-        printData(lData);
-        
-        BTree *scores = highScores(lData);
-        cout << "list of scores:\n";
-        scores->inorder();
-        cout << endl;
-        delete scores;
-    }
+    postGame(lData);
+    
+    cout << endl;
     
     return 0;
 }
+
+///**************************************************************
+///********************** Function Definitions ******************
+///**************************************************************
 
 /// This funtion plays Minesweeper until the player wins or loses.
 /// The player score is returned
@@ -122,6 +131,28 @@ int playOnce() {
     return score;
 }
 
+void postGame(const slMap &data) {
+    cout << "Would you like to see player scores? 'y' for yes: ";
+    char q;
+    cin >> q;
+    if (q=='y') {
+        cout << "Printing player scores:\n";
+        printData(data);
+        
+        BTree *scores = highScores(data);
+        cout << "list of scores:\n";
+        scores->inorder();
+        cout << endl;
+        delete scores;
+        
+        cout << endl;
+        
+        cout << "Collisions that occur in player names\n";
+        LnkdLst<string> *pScores = intoArray(data);
+        printCollisions(pScores);
+        
+    }
+}
 /// Function printData prints the data in the map to the screeen or a file
 void printData(const slMap& m, ostream& out) {
     for(slMap::const_iterator it = m.begin();
@@ -210,8 +241,50 @@ BTree* highScores(const slMap &m) {
         for (LnkdLst<int>::const_iterator lit = it->second.begin();
              lit; lit = lit->next) {
             /// add the score to the set
+            if (!out->find(lit->data)) {
+                    cout << "data found\n";
                 out->insert(lit->data);
+            }
         }
     }
     return out;
+}
+
+/// converts a letter into an int for use in an array where a list
+/// of player names is located
+int simpleHash(char c) {
+    return c-97;
+}
+
+/// get the initial character in a name for the has function
+char getInitial(string name) {
+    return tolower(name[0]);
+}
+
+/// place player names into an array
+LnkdLst<string>* intoArray(const slMap &data) {
+    /// holds players names to be used as part of hash function
+    /// lowercase letters in alphabet
+    const int LOWER = 26;
+    LnkdLst<string> *players  = new LnkdLst<string>[LOWER];
+    for (slMap::const_iterator iter = data.begin(); iter!= data.end(); ++iter) {
+         int index = simpleHash(getInitial(iter->first));
+        players[index].append(iter->first);
+    }
+    
+    return players;
+}
+
+void printCollisions(LnkdLst<string> *l) {
+    /// print the list
+    const int LOWER = 26;
+    for (int i = 0; i != LOWER; ++i) {
+        if (!l[i].empty()) {
+            for(LnkdLst<string>::const_iterator it = l[i].begin();
+                it; it=it->next) {
+                cout << it->data << " ";
+            }
+            cout << endl;
+        }
+    }
 }
