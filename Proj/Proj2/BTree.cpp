@@ -114,19 +114,23 @@ void BTree::insert(int val, iterator node) {
     }
 }
 
-BTree::iterator BTree::find(int val) {
+bool BTree::find(int val) {
     return find(val, root);
 }
 
-BTree::iterator BTree::find(int val, iterator node) {
+bool BTree::find(int val, iterator node) {
     if (node) {
+        cout << "looking: " << node->data << endl;
         if (node->data==val) {
-            return node;
+            cout << "Found val: " << val << endl;
+            return true;
         }
-        find(val,node->left);
-        find(val,node->right);
+        else if ( val < node->data)
+            find(val,node->left);
+        else
+            find(val,node->right);
     }
-    return node;
+    return false;
 }
 
 void BTree::remove(int val) {

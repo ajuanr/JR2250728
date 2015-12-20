@@ -41,8 +41,8 @@ public:
     iterator begin() { return root;}
     iterator begin() const { return root;}
     
-    iterator find(int);
-    iterator find(int, iterator);
+    bool find(int);
+    bool find(int, iterator);
     
     int get(iterator it) {return it->data;}
     

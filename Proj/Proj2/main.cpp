@@ -240,6 +240,7 @@ BTree* highScores(const slMap &m) {
         /// Go through each score
         for (LnkdLst<int>::const_iterator lit = it->second.begin();
              lit; lit = lit->next) {
+            //if (!(out->find(lit->data)))
             /// add the score to the set
                 out->insert(lit->data);
         }
